@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true"
+  tools:context=".moviedetail.MovieDetailActivity">
+  
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:theme="@style/AppTheme.AppBarOverlay">
+    
+    <android.support.design.widget.CollapsingToolbarLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      app:contentScrim="?attr/colorPrimary"
+      app:expandedTitleGravity="center|bottom"
+      app:expandedTitleTextAppearance="@style/AppTheme.TextAppearance.TransparentText"
+      app:layout_scrollFlags="scroll|exitUntilCollapsed"
+      app:toolbarId="@+id/toolbar">
+      
+      <ImageView
+        android:id="@+id/img_movie_detail_poster_backdrop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_backdrop_height"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/desc_backdrop_image"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/img_mock_poster" />
+      
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackdrop"
+        android:gravity="center"
+        android:orientation="vertical">
+        
+        <id.mustofa.app.amber.component.RoundedImageView
+          android:id="@+id/img_movie_detail_poster"
+          android:layout_width="@dimen/image_movie_detail_width"
+          android:layout_height="wrap_content"
+          android:adjustViewBounds="true"
+          tools:src="@drawable/img_mock_poster" />
+        
+        <TextView
+          android:id="@+id/text_movie_detail_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/component_padding_small"
+          android:paddingStart="@dimen/component_margin_small"
+          android:paddingEnd="@dimen/component_margin_small"
+          android:textAlignment="center"
+          android:textAppearance="@style/TextAppearance.AppCompat.Large"
+          tools:text="@string/mock_title" />
+        
+        <TextView
+          android:id="@+id/text_movie_detail_date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/component_padding_tiny"
+          tools:text="@string/mock_date" />
+        
+        <RatingBar
+          android:id="@+id/rate_movie_detail_rating"
+          style="@style/Widget.AppCompat.RatingBar.Small"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/component_padding_tiny"
+          android:isIndicator="true"
+          android:numStars="5"
+          android:stepSize="1" />
+      </LinearLayout>
+      
+      <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+    
+    </android.support.design.widget.CollapsingToolbarLayout>
+  </android.support.design.widget.AppBarLayout>
+  
+  <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    
+    <include layout="@layout/content_movie_detail" />
+  </android.support.v4.widget.NestedScrollView>
+  
+  <android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab_movie_detail_play_trailer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/component_padding_medium"
+    app:layout_anchor="@id/app_bar"
+    app:layout_anchorGravity="bottom|end"
+    app:srcCompat="@drawable/ic_play_light_24dp" />
+
+</android.support.design.widget.CoordinatorLayout>

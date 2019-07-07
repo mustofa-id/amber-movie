@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="id.mustofa.app.amber.movie.MovieActivity">
+  
+  <item
+    android:id="@+id/menu_main_settings"
+    android:icon="@drawable/ic_settings_light_24dp"
+    android:title="@string/action_settings"
+    app:showAsAction="never" />
+</menu>

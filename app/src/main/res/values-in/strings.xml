@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Amber Film</string>
+  
+  <string name="title_tab_movie">Film</string>
+  <string name="title_tab_tv">Acara TV</string>
+  <string name="title_setting">Pengaturan Umum</string>
+  <string name="title_lang_english">English</string>
+  <string name="title_lang_indonesia">Indonesia</string>
+  
+  <string name="desc_poster_image">Gambar poster</string>
+  <string name="desc_backdrop_image">Gambar backdrop</string>
+  
+  <string name="action_settings">Pengaturan</string>
+  
+  <string name="error_unknown">Terjadi kesalahan!</string>
+  
+  <string name="msg_confirm_close">Tekan sekali lagi untuk keluar</string>
+  <string name="msg_playing_trailer">Memutar trailer…</string>
+  <string name="msg_loading">Memuat…</string>
+  <string name="msg_failed_fetch_movies">Gagal mengambil data movie!</string>
+  <string name="msg_no_movie">Tidak ada data!</string>
+  <string name="msg_failed_fetch_genres">Gagal mengambil data genre</string>
+  <string name="msg_no_genre">Tidak ada genre</string>
+  
+  <string name="text_setting_language">Ganti bahasa</string>
+  <string name="text_heading_overview">Kilasan Singkat</string>
+  <string name="text_heading_genres">Genre</string>
+  <string name="text_heading_facts">Facts</string>
+  <string name="text_subheading_vote_count">Total Vote</string>
+  <string name="text_subheading_original_language">Bahasa Asal</string>
+  <string name="text_subheading_popularity">Popularitas</string>
+  <string name="text_subheading_original_title">Judul Asli</string>
+</resources>

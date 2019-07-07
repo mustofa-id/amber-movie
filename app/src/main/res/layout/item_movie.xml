@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/component_margin_tiny"
+  android:clickable="true"
+  android:focusable="true"
+  android:foreground="?android:attr/selectableItemBackground"
+  app:cardCornerRadius="@dimen/card_item_movie_radius"
+  app:cardElevation="@dimen/component_padding_small">
+  
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/component_margin_tiny">
+    
+    <id.mustofa.app.amber.component.RoundedImageView
+      android:id="@+id/img_item_movie_poster"
+      android:layout_width="@dimen/image_item_movie_width"
+      android:layout_height="wrap_content"
+      android:adjustViewBounds="true"
+      android:contentDescription="@string/desc_poster_image"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@drawable/img_mock_poster" />
+  
+    <TextView
+      android:id="@+id/text_item_movie_title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/component_margin_small"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="@dimen/component_margin_small"
+      android:textAppearance="@style/TextAppearance.AppCompat.Large"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/img_item_movie_poster"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="@string/mock_title" />
+    
+    <TextView
+      android:id="@+id/text_item_movie_date"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/component_margin_small"
+      android:layout_marginEnd="@dimen/component_margin_small"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/img_item_movie_poster"
+      app:layout_constraintTop_toBottomOf="@+id/text_item_movie_title"
+      tools:text="@string/mock_date" />
+    
+    <RatingBar
+      android:id="@+id/rate_item_movie_rating"
+      style="@style/Widget.AppCompat.RatingBar.Small"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_marginStart="@dimen/component_margin_small"
+      android:layout_marginTop="@dimen/component_margin_tiny"
+      android:isIndicator="true"
+      android:numStars="5"
+      android:stepSize="1"
+      app:layout_constraintStart_toEndOf="@+id/img_item_movie_poster"
+      app:layout_constraintTop_toBottomOf="@+id/text_item_movie_date" />
+    
+    <TextView
+      android:id="@+id/text_item_movie_rating"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/component_margin_small"
+      app:layout_constraintBottom_toBottomOf="@+id/rate_item_movie_rating"
+      app:layout_constraintStart_toEndOf="@+id/rate_item_movie_rating"
+      app:layout_constraintTop_toTopOf="@+id/rate_item_movie_rating"
+      tools:text="@string/mock_average_rate" />
+  
+    <TextView
+      android:id="@+id/text_item_movie_overview"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="@dimen/component_margin_small"
+      android:layout_marginEnd="@dimen/component_margin_small"
+      android:layout_marginBottom="16dp"
+      android:maxLines="3"
+      app:layout_constraintBottom_toBottomOf="@+id/img_item_movie_poster"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/img_item_movie_poster"
+      app:layout_constraintTop_toBottomOf="@+id/text_item_movie_rating"
+      tools:text="@string/mock_large_text" />
+  </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

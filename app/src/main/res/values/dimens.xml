@@ -1,0 +1,16 @@
+<resources>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  
+  <dimen name="component_margin_medium">16dp</dimen>
+  <dimen name="component_margin_small">8dp</dimen>
+  <dimen name="component_margin_tiny">4dp</dimen>
+  
+  <dimen name="component_padding_medium">16dp</dimen>
+  <dimen name="component_padding_small">8dp</dimen>
+  <dimen name="component_padding_tiny">4dp</dimen>
+  
+  <dimen name="image_backdrop_height">346dp</dimen>
+  <dimen name="image_item_movie_width">122dp</dimen>
+  <dimen name="card_item_movie_radius">18dp</dimen>
+  <dimen name="image_movie_detail_width">124dp</dimen>
+</resources>
