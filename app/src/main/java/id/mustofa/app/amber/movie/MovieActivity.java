@@ -3,9 +3,9 @@ package id.mustofa.app.amber.movie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import id.mustofa.app.amber.R;
+import id.mustofa.app.amber.base.BaseAppCompatActivity;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.setting.SettingActivity;
 
@@ -22,7 +23,7 @@ import id.mustofa.app.amber.setting.SettingActivity;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-public class MovieActivity extends AppCompatActivity {
+public class MovieActivity extends BaseAppCompatActivity {
   
   private boolean mCloseable;
   
@@ -71,9 +72,15 @@ public class MovieActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.menu_main_settings) {
-      startActivity(new Intent(this, SettingActivity.class));
-      finish();
+      Intent settingIntent = new Intent(this, SettingActivity.class);
+      startActivityForResult(settingIntent, 1);
     }
     return super.onOptionsItemSelected(item);
+  }
+  
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    if (resultCode == RESULT_OK) finish();
+    super.onActivityResult(requestCode, resultCode, data);
   }
 }

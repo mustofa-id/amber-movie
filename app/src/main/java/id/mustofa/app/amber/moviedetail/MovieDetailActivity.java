@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 import id.mustofa.app.amber.R;
+import id.mustofa.app.amber.base.BaseAppCompatActivity;
 import id.mustofa.app.amber.data.model.Genre;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
@@ -29,7 +29,7 @@ import id.mustofa.app.amber.util.ViewModelFactory;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-public class MovieDetailActivity extends AppCompatActivity {
+public class MovieDetailActivity extends BaseAppCompatActivity {
   
   public static final String EXTRA_MOVIE_ITEM = "MOVIE_ITEM__";
   public static final String EXTRA_MOVIE_TYPE = "MOVIE_TYPE__";

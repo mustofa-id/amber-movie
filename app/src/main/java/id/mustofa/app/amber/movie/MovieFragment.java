@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.model.MediaType;
@@ -46,12 +47,6 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   }
   
   @Override
-  public void onResume() {
-    super.onResume();
-    mMovieViewModel.start();
-  }
-  
-  @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_movie, container, false);
   }
@@ -71,6 +66,7 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
     ViewModelFactory factory = ViewModelFactory.getInstance();
     mMovieViewModel = ViewModelProviders.of(this, factory).get(MovieViewModel.class);
     mMovieViewModel.setMediaType(getMediaType());
+    mMovieViewModel.start();
   }
   
   private void setupInfo(@NonNull View view) {
@@ -109,7 +105,10 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   
   private void onHasMessage(int message) {
     mTextInfo.setVisibility(message == 0 ? View.GONE : View.VISIBLE);
-    if (message != 0) mTextInfo.setText(message);
+    if (message != 0) {
+      mTextInfo.setText(message);
+      Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
   }
   
   @Override

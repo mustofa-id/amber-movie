@@ -3,6 +3,7 @@ package id.mustofa.app.amber.util;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 
 import java.util.Locale;
@@ -13,8 +14,30 @@ import java.util.Locale;
  */
 public class LocaleHelper {
   
-  // TODO: Save configuration to persistent storage
-  public static void updateLocale(Context context, String langId) {
+  private static LocaleHelper sInstance;
+  
+  private String mCurrentLocale;
+  
+  private LocaleHelper() {}
+  
+  public static LocaleHelper getInstance() {
+    if (sInstance == null) {
+      synchronized (LocaleHelper.class) {
+        if (sInstance == null) {
+          sInstance = new LocaleHelper();
+        }
+      }
+    }
+    return sInstance;
+  }
+  
+  public void updateLocale(@NonNull Context context) {
+    if (mCurrentLocale == null || mCurrentLocale.isEmpty()) return;
+    updateLocale(context, mCurrentLocale);
+  }
+  
+  public void updateLocale(@NonNull Context context, @NonNull String langId) {
+    mCurrentLocale = langId;
     Resources resources = context.getResources();
     
     Locale locale = new Locale(langId);
