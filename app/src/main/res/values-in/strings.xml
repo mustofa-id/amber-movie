@@ -18,7 +18,7 @@
   <string name="msg_confirm_close">Tekan sekali lagi untuk keluar</string>
   <string name="msg_playing_trailer">Memutar trailer…</string>
   <string name="msg_loading">Memuat…</string>
-  <string name="msg_failed_fetch_movies">Gagal mengambil data movie!</string>
+  <string name="msg_failed_fetch_movies">Gagal mengambil data movie dari server!</string>
   <string name="msg_no_movie">Tidak ada data!</string>
   <string name="msg_failed_fetch_genres">Gagal mengambil data genre</string>
   <string name="msg_no_genre">Tidak ada genre</string>

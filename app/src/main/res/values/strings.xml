@@ -17,7 +17,7 @@
   <string name="msg_confirm_close">Press again to close app</string>
   <string name="msg_playing_trailer">Playing trailer…</string>
   <string name="msg_loading">Loading…</string>
-  <string name="msg_failed_fetch_movies">Failed to fetch movies data!</string>
+  <string name="msg_failed_fetch_movies">Failed to fetch movies data from server!</string>
   <string name="msg_no_movie">No movies data!</string>
   <string name="msg_failed_fetch_genres">Failed to fetch genres</string>
   <string name="msg_no_genre">No genre</string>
