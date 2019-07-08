@@ -26,17 +26,14 @@
     
     <activity
       android:name=".movie.MovieActivity"
-      android:configChanges="locale|orientation"
       android:theme="@style/AppTheme.NoActionBar" />
     
     <activity
       android:name=".moviedetail.MovieDetailActivity"
-      android:configChanges="locale|orientation"
       android:theme="@style/AppTheme.MaterialNoActionBar" />
     
     <activity
       android:name=".setting.SettingActivity"
-      android:configChanges="locale"
       android:label="@string/title_setting" />
   </application>
 
