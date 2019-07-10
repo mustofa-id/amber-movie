@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -73,14 +74,19 @@ public class MovieActivity extends BaseAppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.menu_main_settings) {
       Intent settingIntent = new Intent(this, SettingActivity.class);
-      startActivityForResult(settingIntent, 1);
+      // Get result from SettingActivity.
+      // If some change need view to update or recreate
+      startActivityForResult(settingIntent, 0);
     }
     return super.onOptionsItemSelected(item);
   }
   
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    if (resultCode == RESULT_OK) finish();
+    if (resultCode == SettingActivity.RESULT_NEED_UPDATE) {
+      // Here the result code need this view update or recreate
+      recreate();
+    }
     super.onActivityResult(requestCode, resultCode, data);
   }
 }

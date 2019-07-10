@@ -4,14 +4,17 @@
   
   <string name="title_tab_movie">Film</string>
   <string name="title_tab_tv">Acara TV</string>
-  <string name="title_setting">Pengaturan Umum</string>
+  <string name="title_setting">Pengaturan</string>
   <string name="title_lang_english">English</string>
   <string name="title_lang_indonesia">Indonesia</string>
+  <string name="title_prefs_lang">Bahasa</string>
   
   <string name="desc_poster_image">Gambar poster</string>
   <string name="desc_backdrop_image">Gambar backdrop</string>
+  <string name="desc_prefs_lang">Pilih bahasa aplikasi</string>
   
   <string name="action_settings">Pengaturan</string>
+  <string name="action_cancel">Batal</string>
   
   <string name="error_unknown">Terjadi kesalahan!</string>
   
@@ -26,9 +29,10 @@
   <string name="text_setting_language">Ganti bahasa</string>
   <string name="text_heading_overview">Kilasan Singkat</string>
   <string name="text_heading_genres">Genre</string>
-  <string name="text_heading_facts">Facts</string>
+  <string name="text_heading_facts">Fakta</string>
   <string name="text_subheading_vote_count">Total Vote</string>
   <string name="text_subheading_original_language">Bahasa Asal</string>
   <string name="text_subheading_popularity">Popularitas</string>
   <string name="text_subheading_original_title">Judul Asli</string>
+  
 </resources>

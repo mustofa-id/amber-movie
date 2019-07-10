@@ -1,47 +1,56 @@
 package id.mustofa.app.amber.setting;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.PopupMenu;
-
-import java.util.Objects;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.base.BaseAppCompatActivity;
-import id.mustofa.app.amber.movie.MovieActivity;
-import id.mustofa.app.amber.splash.SplashActivity;
-import id.mustofa.app.amber.util.LocaleHelper;
 
 /**
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-public class SettingActivity extends BaseAppCompatActivity {
+public class SettingActivity extends BaseAppCompatActivity implements SettingActionListener {
   
-  private boolean mHasChange;
+  public static final int RESULT_NEED_UPDATE = 868;
+  
+  private static final String KEY_NEED_UPDATE = "_NEED_UPDATE_";
+  
+  private boolean mViewNeedUpdate;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_setting);
-    Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    
+    if (savedInstanceState != null) {
+      mViewNeedUpdate = savedInstanceState.getBoolean(KEY_NEED_UPDATE);
+    }
+    
+    setupActionBar();
+    addSettingFragment();
+  }
+  
+  private void setupActionBar() {
+    ActionBar actionBar = getSupportActionBar();
+    if (actionBar != null) {
+      actionBar.setDisplayHomeAsUpEnabled(true);
+      actionBar.setTitle(R.string.title_setting);
+    }
+  }
+  
+  private void addSettingFragment() {
+    final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    transaction.add(R.id.fl_setting_parent, new SettingFragment());
+    transaction.commit();
   }
   
   @Override
   public void onBackPressed() {
-    if (mHasChange) {
-      Intent intent = new Intent(this, MovieActivity.class);
-      startActivity(intent);
-      setResult(RESULT_OK);
-      finish();
-    } else {
-      super.onBackPressed();
-    }
+    if (mViewNeedUpdate) setResult(RESULT_NEED_UPDATE);
+    super.onBackPressed();
   }
   
   @Override
@@ -50,19 +59,17 @@ public class SettingActivity extends BaseAppCompatActivity {
     return super.onOptionsItemSelected(item);
   }
   
-  public void onChangeLanguage(View view) {
-    PopupMenu popup = new PopupMenu(this, view, Gravity.CENTER);
-    Menu menu = popup.getMenu();
-    menu.add(0, 0, 0, R.string.title_lang_english);
-    menu.add(0, 1, 1, R.string.title_lang_indonesia);
-    popup.setOnMenuItemClickListener(item -> {
-      String langId = item.getItemId() == 0 ? "en" : "in";
-      LocaleHelper localeHelper = LocaleHelper.getInstance();
-      localeHelper.updateLocale(this, langId);
-      mHasChange = true;
-      onBackPressed();
-      return true;
-    });
-    popup.show();
+  @Override
+  public void onPreferenceChanged(boolean forceViewUpdate) {
+    this.mViewNeedUpdate = forceViewUpdate;
+    if (forceViewUpdate) recreate();
+  }
+  
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    // Hold mViewNeedUpdate value to overcome change
+    // due onPreferenceChanged trigger recreate method
+    outState.putBoolean(KEY_NEED_UPDATE, mViewNeedUpdate);
+    super.onSaveInstanceState(outState);
   }
 }

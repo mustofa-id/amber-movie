@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/fl_setting_parent"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".setting.SettingActivity">
-  
-  <Button
-    style="@style/AppTheme.Button.ItemSetting"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:drawableStart="@drawable/ic_language_black_24dp"
-    android:drawablePadding="@dimen/component_padding_small"
-    android:onClick="onChangeLanguage"
-    android:text="@string/text_setting_language"
-    android:textAlignment="textStart"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+  tools:context=".setting.SettingActivity" />

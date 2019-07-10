@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  
+  <string-array name="prefs_entries_lang">
+    <item>Indonesia</item>
+    <item>English</item>
+  </string-array>
+  <string-array name="prefs_entryValues_lang">
+    <item>in</item>
+    <item>en</item>
+  </string-array>
+  
+</resources>

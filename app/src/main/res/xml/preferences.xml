@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  
+  <ListPreference
+    android:entries="@array/prefs_entries_lang"
+    android:entryValues="@array/prefs_entryValues_lang"
+    android:key="@string/key_prefs_lang"
+    android:negativeButtonText="@string/action_cancel"
+    android:summary="@string/desc_prefs_lang"
+    android:title="@string/title_prefs_lang"
+    app:iconSpaceReserved="false" />
+</PreferenceScreen>

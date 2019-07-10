@@ -1,12 +1,16 @@
 package id.mustofa.app.amber.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.v7.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 
 import java.util.Locale;
+
+import id.mustofa.app.amber.R;
 
 /**
  * @author Habib Mustofa
@@ -14,33 +18,13 @@ import java.util.Locale;
  */
 public class LocaleHelper {
   
-  private static LocaleHelper sInstance;
-  
-  private String mCurrentLocale;
-  
-  private LocaleHelper() {}
-  
-  public static LocaleHelper getInstance() {
-    if (sInstance == null) {
-      synchronized (LocaleHelper.class) {
-        if (sInstance == null) {
-          sInstance = new LocaleHelper();
-        }
-      }
-    }
-    return sInstance;
-  }
-  
-  public void updateLocale(@NonNull Context context) {
-    if (mCurrentLocale == null || mCurrentLocale.isEmpty()) return;
-    updateLocale(context, mCurrentLocale);
-  }
-  
-  public void updateLocale(@NonNull Context context, @NonNull String langId) {
-    mCurrentLocale = langId;
-    Resources resources = context.getResources();
+  public static void updateLocale(@NonNull Context context) {
+    final String defaultLang = context.getResources().getStringArray(R.array.prefs_entryValues_lang)[0];
+    final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    final String lang = prefs.getString(context.getString(R.string.key_prefs_lang), defaultLang);
     
-    Locale locale = new Locale(langId);
+    Resources resources = context.getResources();
+    Locale locale = new Locale(lang);
     Locale.setDefault(locale);
     
     Configuration configuration = new Configuration();
