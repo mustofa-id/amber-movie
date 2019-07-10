@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.mustofa.app.amber.data.source.remote.ApiClient;
-import id.mustofa.app.amber.data.source.RemoteDataSource;
+import id.mustofa.app.amber.data.source.remote.MovieRemoteDao;
 import id.mustofa.app.amber.data.model.Genre;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
@@ -26,8 +26,8 @@ public final class MovieRepository {
   
   public void findMovies(@NonNull MediaType mediaType, @NonNull ResultListener<List<Movie>> listener) {
     final List<Movie> movies = new ArrayList<>();
-    final RemoteDataSource remoteDataSource = ApiClient.retrofit().create(RemoteDataSource.class);
-    final Call<MovieWrapper> serviceMovies = remoteDataSource.getDiscovers(mediaType.getValue());
+    final MovieRemoteDao movieRemoteDao = ApiClient.retrofit().create(MovieRemoteDao.class);
+    final Call<MovieWrapper> serviceMovies = movieRemoteDao.getDiscovers(mediaType.getValue());
     
     serviceMovies.enqueue(new Callback<MovieWrapper>() {
       @Override
@@ -50,8 +50,8 @@ public final class MovieRepository {
   
   public void findGenres(@NonNull MediaType type, @NonNull ResultListener<List<Genre>> listener) {
     final List<Genre> genres = new ArrayList<>();
-    final RemoteDataSource remoteDataSource = ApiClient.retrofit().create(RemoteDataSource.class);
-    final Call<Genre.Wrapper> serviceGenres = remoteDataSource.getGenres(type.getValue());
+    final MovieRemoteDao movieRemoteDao = ApiClient.retrofit().create(MovieRemoteDao.class);
+    final Call<Genre.Wrapper> serviceGenres = movieRemoteDao.getGenres(type.getValue());
     
     serviceGenres.enqueue(new Callback<Genre.Wrapper>() {
       @Override

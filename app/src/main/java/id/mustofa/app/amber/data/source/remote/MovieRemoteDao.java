@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.data.source;
+package id.mustofa.app.amber.data.source.remote;
 
 import id.mustofa.app.amber.BuildConfig;
 import id.mustofa.app.amber.data.model.Genre;
@@ -11,7 +11,7 @@ import retrofit2.http.Path;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-public interface RemoteDataSource {
+public interface MovieRemoteDao {
   
   @GET("discover/{type}?language=en-US&api_key=" + BuildConfig.MOVIEDB_API_KEY)
   Call<MovieWrapper> getDiscovers(@Path("type") String type);
