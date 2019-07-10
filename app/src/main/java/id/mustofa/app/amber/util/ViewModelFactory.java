@@ -33,11 +33,6 @@ public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory
     this.mMovieRepository = new MovieRepository();
   }
   
-  @SuppressWarnings("unused")
-  public void destroyInstance() {
-    svInstance = null;
-  }
-  
   @NonNull
   @Override
   @SuppressWarnings("unchecked")
