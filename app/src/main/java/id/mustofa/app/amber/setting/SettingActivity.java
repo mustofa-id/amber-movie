@@ -30,7 +30,7 @@ public class SettingActivity extends BaseAppCompatActivity implements SettingAct
     }
     
     setupActionBar();
-    addSettingFragment();
+    bindSettingFragment();
   }
   
   private void setupActionBar() {
@@ -41,9 +41,9 @@ public class SettingActivity extends BaseAppCompatActivity implements SettingAct
     }
   }
   
-  private void addSettingFragment() {
+  private void bindSettingFragment() {
     final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    transaction.add(R.id.fl_setting_parent, new SettingFragment());
+    transaction.replace(R.id.fl_setting_parent, new SettingFragment());
     transaction.commit();
   }
   
