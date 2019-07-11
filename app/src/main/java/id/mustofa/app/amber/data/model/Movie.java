@@ -1,5 +1,7 @@
 package id.mustofa.app.amber.data.model;
 
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,13 +14,14 @@ import java.util.List;
 /**
  * @author Habib Mustofa
  * Indonesia on 05/07/19.
- *
+ * <p>
  * SerializedName prioritize to the movie. That mean value is assign
  * for movie field and alternate is tv show field from JSON schema.
  */
 @SuppressWarnings("unused")
 public class Movie implements Parcelable {
   
+  @PrimaryKey
   @Expose
   private long id;
   
@@ -74,6 +77,10 @@ public class Movie implements Parcelable {
   @Expose
   private boolean adult;
   
+  // Room required no-args computer
+  public Movie() {}
+  
+  @Ignore
   private Movie(Parcel in) {
     id = in.readLong();
     title = in.readString();
@@ -91,6 +98,7 @@ public class Movie implements Parcelable {
     adult = in.readByte() != 0;
   }
   
+  @Ignore
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(id);
@@ -109,11 +117,13 @@ public class Movie implements Parcelable {
     dest.writeByte((byte) (adult ? 1 : 0));
   }
   
+  @Ignore
   @Override
   public int describeContents() {
     return 0;
   }
   
+  @Ignore
   public static final Creator<Movie> CREATOR = new Creator<Movie>() {
     @Override
     public Movie createFromParcel(Parcel in) {
@@ -130,55 +140,111 @@ public class Movie implements Parcelable {
     return id;
   }
   
+  public void setId(long id) {
+    this.id = id;
+  }
+  
   public String getTitle() {
     return title;
+  }
+  
+  public void setTitle(String title) {
+    this.title = title;
   }
   
   public String getOriginalTitle() {
     return originalTitle;
   }
   
+  public void setOriginalTitle(String originalTitle) {
+    this.originalTitle = originalTitle;
+  }
+  
   public String getPosterPath() {
     return posterPath;
+  }
+  
+  public void setPosterPath(String posterPath) {
+    this.posterPath = posterPath;
   }
   
   public String getBackdropPath() {
     return backdropPath;
   }
   
+  public void setBackdropPath(String backdropPath) {
+    this.backdropPath = backdropPath;
+  }
+  
   public String getReleaseDate() {
     return releaseDate;
+  }
+  
+  public void setReleaseDate(String releaseDate) {
+    this.releaseDate = releaseDate;
   }
   
   public float getPopularity() {
     return popularity;
   }
   
+  public void setPopularity(float popularity) {
+    this.popularity = popularity;
+  }
+  
   public int getVoteCount() {
     return voteCount;
+  }
+  
+  public void setVoteCount(int voteCount) {
+    this.voteCount = voteCount;
   }
   
   public float getVoteAverage() {
     return voteAverage;
   }
   
+  public void setVoteAverage(float voteAverage) {
+    this.voteAverage = voteAverage;
+  }
+  
   public String getOverview() {
     return overview;
+  }
+  
+  public void setOverview(String overview) {
+    this.overview = overview;
   }
   
   public String getOriginalLanguage() {
     return originalLanguage;
   }
   
+  public void setOriginalLanguage(String originalLanguage) {
+    this.originalLanguage = originalLanguage;
+  }
+  
   public List<String> getOriginCountry() {
     return originCountry;
+  }
+  
+  public void setOriginCountry(List<String> originCountry) {
+    this.originCountry = originCountry;
   }
   
   public List<Long> getGenreIds() {
     return genreIds;
   }
   
+  public void setGenreIds(List<Long> genreIds) {
+    this.genreIds = genreIds;
+  }
+  
   public boolean isAdult() {
     return adult;
+  }
+  
+  public void setAdult(boolean adult) {
+    this.adult = adult;
   }
 }

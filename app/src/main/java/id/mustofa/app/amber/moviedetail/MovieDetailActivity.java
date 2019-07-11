@@ -57,7 +57,7 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
   }
   
   private void setupViewModel() {
-    ViewModelFactory factory = ViewModelFactory.getInstance();
+    ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
     mMovieDetailViewModel = ViewModelProviders.of(this, factory).get(MovieDetailViewModel.class);
   }
   

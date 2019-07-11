@@ -63,7 +63,7 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   }
   
   private void setupViewModel() {
-    ViewModelFactory factory = ViewModelFactory.getInstance();
+    ViewModelFactory factory = ViewModelFactory.getInstance(getContext());
     mMovieViewModel = ViewModelProviders.of(this, factory).get(MovieViewModel.class);
     mMovieViewModel.setMediaType(getMediaType());
     mMovieViewModel.start();

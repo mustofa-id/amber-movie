@@ -15,20 +15,20 @@ import static org.junit.Assert.assertTrue;
  */
 public class MovieRepositoryTest {
   
-  private MovieRepository movieRepository = new MovieRepository();
-  
-  @Test
-  public void moviesShouldNotEmpty() {
-    movieRepository.findMovies(MediaType.MOVIE, (movies, error) ->
-        assertFalse(movies.isEmpty())
-    );
-  }
-  
-  @Test
-  public void moviesSizeGreaterThanZero() {
-    movieRepository.findMovies(MediaType.MOVIE, (movies, error) -> {
-      boolean condition = movies.size() > 0;
-      assertTrue(condition);
-    });
-  }
+//  private MovieRepository movieRepository = new MovieRepository();
+//
+//  @Test
+//  public void moviesShouldNotEmpty() {
+//    movieRepository.findMovies(MediaType.MOVIE, (movies, error) ->
+//        assertFalse(movies.isEmpty())
+//    );
+//  }
+//
+//  @Test
+//  public void moviesSizeGreaterThanZero() {
+//    movieRepository.findMovies(MediaType.MOVIE, (movies, error) -> {
+//      boolean condition = movies.size() > 0;
+//      assertTrue(condition);
+//    });
+//  }
 }
