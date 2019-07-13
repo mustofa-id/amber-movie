@@ -13,4 +13,5 @@
   <dimen name="image_item_movie_width">122dp</dimen>
   <dimen name="card_item_movie_radius">18dp</dimen>
   <dimen name="image_movie_detail_width">124dp</dimen>
+  <dimen name="drawer_header_height">224dp</dimen>
 </resources>
