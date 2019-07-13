@@ -77,7 +77,7 @@ public class Movie implements Parcelable {
   @Expose
   private boolean adult;
   
-  // Room required no-args computer
+  // Room required no-args constructor
   public Movie() {}
   
   @Ignore
