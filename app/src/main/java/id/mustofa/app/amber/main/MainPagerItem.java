@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.movie;
+package id.mustofa.app.amber.main;
 
 import android.support.v4.app.Fragment;
 
@@ -6,12 +6,12 @@ import android.support.v4.app.Fragment;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-final class MoviePagerItem {
+final class MainPagerItem {
   
   private String title;
   private Fragment fragment;
   
-  MoviePagerItem(String title, Fragment fragment) {
+  MainPagerItem(String title, Fragment fragment) {
     this.title = title;
     this.fragment = fragment;
   }

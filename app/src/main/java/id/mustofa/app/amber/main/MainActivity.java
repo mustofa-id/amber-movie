@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.movie;
+package id.mustofa.app.amber.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,34 +6,47 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.base.BaseAppCompatActivity;
 import id.mustofa.app.amber.data.model.MediaType;
+import id.mustofa.app.amber.movie.MovieFragment;
+import id.mustofa.app.amber.moviefavorite.MovieFavoriteFragment;
 import id.mustofa.app.amber.setting.SettingActivity;
 
 /**
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-public class MovieActivity extends BaseAppCompatActivity {
+public class MainActivity extends BaseAppCompatActivity {
+  
+  private static final String KEY_CURRENT_MODE = "CURRENT_MODE__";
   
   private boolean mCloseable;
+  private int mCurrentMovieMode;
+  private List<MainPagerItem> mPagerItems;
+  private MainPagerAdapter mMainPagerAdapter;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_movie);
+    setContentView(R.layout.activity_main);
+    if (savedInstanceState != null) {
+      mCurrentMovieMode = savedInstanceState.getInt(KEY_CURRENT_MODE, 0);
+    }
     setupToolbar();
+    updateTitle();
     setupPager();
+    updatePagerItems();
   }
   
   private void setupToolbar() {
@@ -41,18 +54,41 @@ public class MovieActivity extends BaseAppCompatActivity {
     setSupportActionBar(toolbar);
   }
   
-  private void setupPager() {
-    MoviePagerAdapter moviePagerAdapter = new MoviePagerAdapter(getSupportFragmentManager(), getMoviePagerItems());
-    ViewPager viewPager = findViewById(R.id.view_pager);
-    viewPager.setAdapter(moviePagerAdapter);
-    TabLayout tabs = findViewById(R.id.tabs);
-    tabs.setupWithViewPager(viewPager);
+  private void updateTitle() {
+    ActionBar actionBar = getSupportActionBar();
+    if (actionBar != null) {
+      actionBar.setTitle(mCurrentMovieMode == 0 ? "Discover" : "Favorite");
+    }
   }
   
-  private List<MoviePagerItem> getMoviePagerItems() {
+  private void setupPager() {
+    ViewPager viewPager = findViewById(R.id.view_pager);
+    TabLayout tabLayout = findViewById(R.id.tabs);
+    mPagerItems = new ArrayList<>();
+    mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), mPagerItems);
+    viewPager.setAdapter(mMainPagerAdapter);
+    tabLayout.setupWithViewPager(viewPager);
+  }
+  
+  private void updatePagerItems() {
+    mPagerItems.clear();
+    List<MainPagerItem> pagerItems = mCurrentMovieMode == 0
+        ? getMoviePagerItems() : getMovieFavoritePagerItems();
+    mPagerItems.addAll(pagerItems);
+    mMainPagerAdapter.notifyDataSetChanged();
+  }
+  
+  private List<MainPagerItem> getMoviePagerItems() {
     return Arrays.asList(
-        new MoviePagerItem(getString(R.string.title_tab_movie), MovieFragment.newInstance(MediaType.MOVIE)),
-        new MoviePagerItem(getString(R.string.title_tab_tv), MovieFragment.newInstance(MediaType.TV))
+        new MainPagerItem(getString(R.string.title_tab_movie), MovieFragment.newInstance(MediaType.MOVIE)),
+        new MainPagerItem(getString(R.string.title_tab_tv), MovieFragment.newInstance(MediaType.TV))
+    );
+  }
+  
+  private List<MainPagerItem> getMovieFavoritePagerItems() {
+    return Arrays.asList(
+        new MainPagerItem(getString(R.string.title_tab_movie), MovieFavoriteFragment.newInstance(MediaType.MOVIE)),
+        new MainPagerItem(getString(R.string.title_tab_tv), MovieFavoriteFragment.newInstance(MediaType.TV))
     );
   }
   
@@ -88,5 +124,11 @@ public class MovieActivity extends BaseAppCompatActivity {
       recreate();
     }
     super.onActivityResult(requestCode, resultCode, data);
+  }
+  
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    outState.putInt(KEY_CURRENT_MODE, mCurrentMovieMode);
+    super.onSaveInstanceState(outState);
   }
 }

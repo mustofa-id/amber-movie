@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import id.mustofa.app.amber.movie.MovieActivity;
+import id.mustofa.app.amber.main.MainActivity;
 
 /**
  * @author Habib Mustofa
@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
   }
   
   private void startMovieActivity() {
-    startActivity(new Intent(this, MovieActivity.class));
+    startActivity(new Intent(this, MainActivity.class));
     finish();
   }
 }
