@@ -3,10 +3,15 @@ package id.mustofa.app.amber.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,31 +32,35 @@ import id.mustofa.app.amber.setting.SettingActivity;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-public class MainActivity extends BaseAppCompatActivity {
+public class MainActivity extends BaseAppCompatActivity
+    implements NavigationView.OnNavigationItemSelectedListener {
   
   private static final String KEY_CURRENT_MODE = "CURRENT_MODE__";
   
   private boolean mCloseable;
   private int mCurrentMovieMode;
   private List<MainPagerItem> mPagerItems;
-  private MainPagerAdapter mMainPagerAdapter;
+  private MainPagerAdapter mPagerAdapter;
+  private DrawerLayout mDrawer;
+  private Toolbar mToolbar;
+  private NavigationView mNavigationView;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    setupToolbar();
+    setupPager();
+    setupDrawer();
     if (savedInstanceState != null) {
       mCurrentMovieMode = savedInstanceState.getInt(KEY_CURRENT_MODE, 0);
     }
-    setupToolbar();
-    updateTitle();
-    setupPager();
-    updatePagerItems();
+    setCurrentMovieMode(mCurrentMovieMode);
   }
   
   private void setupToolbar() {
-    Toolbar toolbar = findViewById(R.id.toolbar_main);
-    setSupportActionBar(toolbar);
+    mToolbar = findViewById(R.id.toolbar_main);
+    setSupportActionBar(mToolbar);
   }
   
   private void updateTitle() {
@@ -61,12 +70,22 @@ public class MainActivity extends BaseAppCompatActivity {
     }
   }
   
+  private void setupDrawer() {
+    mDrawer = findViewById(R.id.drawer_layout);
+    mNavigationView = findViewById(R.id.nav_view);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+        mDrawer, mToolbar, R.string.desc_drawer_open, R.string.desc_drawer_close);
+    mDrawer.addDrawerListener(toggle);
+    toggle.syncState();
+    mNavigationView.setNavigationItemSelectedListener(this);
+  }
+  
   private void setupPager() {
     ViewPager viewPager = findViewById(R.id.view_pager);
     TabLayout tabLayout = findViewById(R.id.tabs);
     mPagerItems = new ArrayList<>();
-    mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), mPagerItems);
-    viewPager.setAdapter(mMainPagerAdapter);
+    mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), mPagerItems);
+    viewPager.setAdapter(mPagerAdapter);
     tabLayout.setupWithViewPager(viewPager);
   }
   
@@ -75,7 +94,17 @@ public class MainActivity extends BaseAppCompatActivity {
     List<MainPagerItem> pagerItems = mCurrentMovieMode == 0
         ? getMoviePagerItems() : getMovieFavoritePagerItems();
     mPagerItems.addAll(pagerItems);
-    mMainPagerAdapter.notifyDataSetChanged();
+    mPagerAdapter.notifyDataSetChanged();
+  }
+  
+  private void setCurrentMovieMode(int mode) {
+    mCurrentMovieMode = mode;
+    mNavigationView
+        .getMenu()
+        .getItem(mode)
+        .setChecked(true);
+    updateTitle();
+    updatePagerItems();
   }
   
   private List<MainPagerItem> getMoviePagerItems() {
@@ -102,19 +131,25 @@ public class MainActivity extends BaseAppCompatActivity {
   
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_main, menu);
+    getMenuInflater().inflate(R.menu.menu_activity_main, menu);
     return super.onCreateOptionsMenu(menu);
   }
   
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == R.id.menu_main_settings) {
+  public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    int id = menuItem.getItemId();
+    if (id == R.id.nav_main_discover) {
+      setCurrentMovieMode(0);
+    } else if (id == R.id.nav_main_favorite) {
+      setCurrentMovieMode(1);
+    } else if (id == R.id.nav_main_setting) {
       Intent settingIntent = new Intent(this, SettingActivity.class);
       // Get result from SettingActivity.
       // If some change need view to update or recreate
       startActivityForResult(settingIntent, 0);
     }
-    return super.onOptionsItemSelected(item);
+    mDrawer.closeDrawer(GravityCompat.START);
+    return false;
   }
   
   @Override

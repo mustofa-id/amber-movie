@@ -34,5 +34,11 @@
   <string name="text_subheading_original_language">Bahasa Asal</string>
   <string name="text_subheading_popularity">Popularitas</string>
   <string name="text_subheading_original_title">Judul Asli</string>
-  
+  <string name="title_movie_discover">Discover</string>
+  <string name="title_movie_favorite">Favorite</string>
+  <string name="action_search">Search</string>
+  <string name="title_others">Others</string>
+  <string name="desc_drawer_close">close navigation drawer</string>
+  <string name="desc_drawer_open">Open  navigation drawer</string>
+
 </resources>

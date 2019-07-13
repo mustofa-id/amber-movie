@@ -54,4 +54,10 @@
     "interact, and exist in space and in relation to each other. Realistic lighting shows "
     "seams, divides space, and indicates moving parts."
   </string>
+  <string name="title_movie_discover">Discover</string>
+  <string name="title_movie_favorite">Favorite</string>
+  <string name="action_search">Search</string>
+  <string name="title_others">Others</string>
+  <string name="desc_drawer_close">Close navigation drawer</string>
+  <string name="desc_drawer_open">Open  navigation drawer</string>
 </resources>
