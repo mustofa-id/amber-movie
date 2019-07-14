@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,9 +15,24 @@ import java.util.List;
  */
 public class DataConverter {
   
+  private static Gson gson;
+  
+  static {
+    gson = new Gson();
+  }
+  
   @TypeConverter
   public List<Long> toListLong(String value) {
-    return fromJson(value);
+    List<Long> longs = new ArrayList<>();
+    
+    // Gson convert every JSON number to java.lang.Double
+    // Do handlers here to change the type
+    // From documentation is better use TypeAdapterFactory
+    List<Object> objLongs = fromJson(value);
+    for (Object obj : objLongs) {
+      longs.add(Double.valueOf(obj.toString()).longValue());
+    }
+    return longs;
   }
   
   @TypeConverter
@@ -36,13 +52,15 @@ public class DataConverter {
   
   private <T> String toJson(T value) {
     if (value == null) return null;
-    Type type = new TypeToken<T>() {}.getType();
-    return new Gson().toJson(value, type);
+    Type type = new TypeToken<T>() {
+    }.getType();
+    return gson.toJson(value, type);
   }
   
   private <T> T fromJson(String value) {
     if (value == null) return null;
-    Type type = new TypeToken<T>() {}.getType();
-    return new Gson().fromJson(value, type);
+    Type type = new TypeToken<T>() {
+    }.getType();
+    return gson.fromJson(value, type);
   }
 }
