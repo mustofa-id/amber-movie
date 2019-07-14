@@ -21,6 +21,8 @@
   <string name="action_settings">Settings</string>
   <string name="action_cancel">Cancel</string>
   <string name="action_search">Search</string>
+  <string name="action_favorite">Favorite</string>
+  <string name="action_favorite_added">Remove favorite</string>
   
   <string name="error_unknown">Something went wrong!</string>
   
@@ -31,6 +33,12 @@
   <string name="msg_no_movie">No movies data!</string>
   <string name="msg_failed_fetch_genres">Failed to fetch genres</string>
   <string name="msg_no_genre">No genre</string>
+  <string name="msg_failed_get_movie_favorite">Failed to load movie favorites</string>
+  <string name="msg_no_movie_favorite">Movie favorite empty</string>
+  <string name="msg_add_favorite_fail">Failed add to favorite</string>
+  <string name="msg_add_favorite_ok">Added to favorite</string>
+  <string name="msg_remove_favorite_fail">Failed to remove favorite</string>
+  <string name="msg_remove_favorite_ok">Removed from favorite</string>
   
   <string name="text_setting_language">Change language</string>
   <string name="text_heading_overview">Overview</string>

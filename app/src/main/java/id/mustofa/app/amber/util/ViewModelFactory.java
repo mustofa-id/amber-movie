@@ -12,6 +12,7 @@ import id.mustofa.app.amber.data.source.remote.ApiClient;
 import id.mustofa.app.amber.data.source.remote.MovieRemoteDao;
 import id.mustofa.app.amber.movie.MovieViewModel;
 import id.mustofa.app.amber.moviedetail.MovieDetailViewModel;
+import id.mustofa.app.amber.moviefavorite.MovieFavoriteViewModel;
 
 /**
  * @author Habib Mustofa
@@ -52,6 +53,8 @@ public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory
       return (T) new MovieViewModel(mMovieRepository);
     } else if (modelClass.isAssignableFrom(MovieDetailViewModel.class)) {
       return (T) new MovieDetailViewModel(mMovieRepository);
+    } else if (modelClass.isAssignableFrom(MovieFavoriteViewModel.class)) {
+      return (T) new MovieFavoriteViewModel(mMovieRepository);
     }
     throw new IllegalArgumentException("Unknown ViewModel: " + modelClass.getName());
   }

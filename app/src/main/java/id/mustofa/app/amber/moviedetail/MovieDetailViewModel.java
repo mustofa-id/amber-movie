@@ -12,6 +12,7 @@ import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.data.model.Genre;
 import id.mustofa.app.amber.data.model.MediaType;
+import id.mustofa.app.amber.data.model.MovieFavorite;
 
 /**
  * @author Habib Mustofa
@@ -20,7 +21,9 @@ import id.mustofa.app.amber.data.model.MediaType;
 public class MovieDetailViewModel extends ViewModel {
   
   private final MutableLiveData<List<Genre>> mGenres = new MutableLiveData<>();
-  private final MutableLiveData<Integer> mMessageResId = new MutableLiveData<>();
+  private final MutableLiveData<Integer> mGenresMessageResId = new MutableLiveData<>();
+  private final MutableLiveData<Boolean> mIsFavorite = new MutableLiveData<>();
+  private final MutableLiveData<Integer> mIsFavoriteMessageResId = new MutableLiveData<>();
   
   private final MovieRepository mMovieRepository;
   
@@ -35,14 +38,42 @@ public class MovieDetailViewModel extends ViewModel {
     mMediaType = type;
   }
   
+  void addToFavorite(MovieFavorite movie) {
+    movie.setType(mMediaType.getValue());
+    mMovieRepository.addToFavorite(movie, (id, error) -> {
+      if (error != null || id == -1) {
+        mIsFavoriteMessageResId.postValue(R.string.msg_add_favorite_fail);
+      } else {
+        mIsFavoriteMessageResId.postValue(R.string.msg_add_favorite_ok);
+        checkFavorite(movie.getId());
+      }
+    });
+  }
+  
+  void removeFromFavorite(MovieFavorite movie) {
+    mMovieRepository.removeFromFavorite(movie, (row, error) -> {
+      if (error != null || row == -1) {
+        mIsFavoriteMessageResId.postValue(R.string.msg_remove_favorite_fail);
+      } else {
+        mIsFavoriteMessageResId.postValue(R.string.msg_remove_favorite_ok);
+        checkFavorite(movie.getId());
+      }
+    });
+  }
+  
+  void checkFavorite(long movieId) {
+    mMovieRepository.isInFavorite(movieId,
+        (isFavorite, error) -> mIsFavorite.postValue(error != null || !isFavorite));
+  }
+  
   void setGenreIds(@NonNull List<Long> genreIds) {
-    mMessageResId.postValue(R.string.msg_loading);
+    mGenresMessageResId.postValue(R.string.msg_loading);
     mMovieRepository.findGenres(mMediaType, (genres, error) -> {
       if (error != null) {
-        mMessageResId.postValue(R.string.msg_failed_fetch_genres);
+        mGenresMessageResId.postValue(R.string.msg_failed_fetch_genres);
       } else {
         if (genres.isEmpty()) {
-          mMessageResId.postValue(R.string.msg_no_genre);
+          mGenresMessageResId.postValue(R.string.msg_no_genre);
         } else {
           List<Genre> genresToPost = new ArrayList<>();
           for (Genre genre : genres) {
@@ -54,7 +85,7 @@ public class MovieDetailViewModel extends ViewModel {
             }
           }
           mGenres.postValue(genresToPost);
-          mMessageResId.postValue(0);
+          mGenresMessageResId.postValue(0);
         }
       }
     });
@@ -64,7 +95,15 @@ public class MovieDetailViewModel extends ViewModel {
     return mGenres;
   }
   
-  LiveData<Integer> getMessageResId() {
-    return mMessageResId;
+  LiveData<Integer> getGenresMessageResId() {
+    return mGenresMessageResId;
+  }
+  
+  LiveData<Boolean> getIsFavorite() {
+    return mIsFavorite;
+  }
+  
+  LiveData<Integer> getFavoriteMessageResId() {
+    return mIsFavoriteMessageResId;
   }
 }

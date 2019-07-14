@@ -6,6 +6,7 @@ import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import id.mustofa.app.amber.base.BaseAppCompatActivity;
 import id.mustofa.app.amber.data.model.Genre;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
+import id.mustofa.app.amber.data.model.MovieFavorite;
 import id.mustofa.app.amber.util.DateUtil;
 import id.mustofa.app.amber.util.ImageLoader;
 import id.mustofa.app.amber.util.ViewModelFactory;
@@ -43,6 +45,9 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
   private TextView mTextGenreMessage;
   private RatingBar mRateRating;
   private ChipGroup mChipGroupGenre;
+  private MenuItem mMenuFavorite, mMenuRemoveFavorite;
+  
+  private Movie mMovie;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,29 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
     mFabPlayTrailer.setOnClickListener(this::onPlayTrailer);
   }
   
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_activity_movie_detail, menu);
+    mMenuFavorite = menu.findItem(R.id.act_movie_detail_favorite);
+    mMenuRemoveFavorite = menu.findItem(R.id.act_movie_detail_remove_favorite);
+    mMovieDetailViewModel.checkFavorite(mMovie.getId());
+    return super.onCreateOptionsMenu(menu);
+  }
+  
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    final MovieFavorite movie = new MovieFavorite(mMovie);
+    int id = item.getItemId();
+    if (id == android.R.id.home) {
+      onBackPressed();
+    } else if (id == mMenuFavorite.getItemId()) {
+      mMovieDetailViewModel.addToFavorite(movie);
+    } else if (id == mMenuRemoveFavorite.getItemId()) {
+      mMovieDetailViewModel.removeFromFavorite(movie);
+    }
+    return super.onOptionsItemSelected(item);
+  }
+  
   private void setupViewModel() {
     ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
     mMovieDetailViewModel = ViewModelProviders.of(this, factory).get(MovieDetailViewModel.class);
@@ -63,7 +91,9 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
   
   private void subscribeViewModelChange() {
     mMovieDetailViewModel.getGenres().observe(this, this::onGenresLoaded);
-    mMovieDetailViewModel.getMessageResId().observe(this, this::onGenresHasMessage);
+    mMovieDetailViewModel.getGenresMessageResId().observe(this, this::onGenresHasMessage);
+    mMovieDetailViewModel.getIsFavorite().observe(this, this::onIsFavorite);
+    mMovieDetailViewModel.getFavoriteMessageResId().observe(this, this::onFavoriteHasMessage);
   }
   
   private void setupToolbar() {
@@ -88,32 +118,26 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
     mChipGroupGenre = findViewById(R.id.cg_movie_detail_chips);
   }
   
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) onBackPressed();
-    return super.onOptionsItemSelected(item);
-  }
-  
   private void populateMovieToViews() {
-    Movie movie = getIntent().getParcelableExtra(EXTRA_MOVIE_ITEM);
+    mMovie = getIntent().getParcelableExtra(EXTRA_MOVIE_ITEM);
     MediaType mediaType = (MediaType) getIntent().getSerializableExtra(EXTRA_MOVIE_TYPE);
-    if (movie == null || mediaType == null) {
+    if (mMovie == null || mediaType == null) {
       Toast.makeText(this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
       return;
     }
     mMovieDetailViewModel.setMediaType(mediaType);
-    mMovieDetailViewModel.setGenreIds(movie.getGenreIds());
-    ImageLoader.load(this, movie.getPosterPath(), mImagePoster);
-    ImageLoader.load(this, movie.getBackdropPath(), mImageBackdrop);
-    setTitle(movie.getTitle());
-    mTextTitle.setText(movie.getTitle());
-    mTextDate.setText(DateUtil.reformatDate(movie.getReleaseDate(), "dd MMMM yyyy"));
-    mTextPopularity.setText(String.valueOf(movie.getPopularity()));
-    mTextVoteCount.setText(String.valueOf(movie.getVoteCount()));
-    mTextOriginalTitle.setText(movie.getOriginalTitle());
-    mTextOriginalLang.setText(movie.getOriginalLanguage());
-    mRateRating.setRating(movie.getVoteAverage() / 2);
-    mTextOverview.setText(movie.getOverview());
+    mMovieDetailViewModel.setGenreIds(mMovie.getGenreIds());
+    ImageLoader.load(this, mMovie.getPosterPath(), mImagePoster);
+    ImageLoader.load(this, mMovie.getBackdropPath(), mImageBackdrop);
+    setTitle(mMovie.getTitle());
+    mTextTitle.setText(mMovie.getTitle());
+    mTextDate.setText(DateUtil.reformatDate(mMovie.getReleaseDate(), "dd MMMM yyyy"));
+    mTextPopularity.setText(String.valueOf(mMovie.getPopularity()));
+    mTextVoteCount.setText(String.valueOf(mMovie.getVoteCount()));
+    mTextOriginalTitle.setText(mMovie.getOriginalTitle());
+    mTextOriginalLang.setText(mMovie.getOriginalLanguage());
+    mRateRating.setRating(mMovie.getVoteAverage() / 2);
+    mTextOverview.setText(mMovie.getOverview());
   }
   
   private void onGenresLoaded(List<Genre> genres) {
@@ -128,6 +152,15 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
   private void onGenresHasMessage(int message) {
     mTextGenreMessage.setVisibility(message == 0 ? View.GONE : View.VISIBLE);
     if (message != 0) mTextGenreMessage.setText(message);
+  }
+  
+  private void onIsFavorite(Boolean isFavorite) {
+    mMenuFavorite.setVisible(isFavorite);
+    mMenuRemoveFavorite.setVisible(!isFavorite);
+  }
+  
+  private void onFavoriteHasMessage(int message) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
   }
   
   @SuppressWarnings("unused")

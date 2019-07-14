@@ -22,6 +22,8 @@
   <string name="action_settings">Pengaturan</string>
   <string name="action_cancel">Batal</string>
   <string name="action_search">Pencarian</string>
+  <string name="action_favorite">Favorite</string>
+  <string name="action_favorite_added">Hapus favorite</string>
   
   <string name="error_unknown">Terjadi kesalahan!</string>
   
@@ -32,6 +34,12 @@
   <string name="msg_no_movie">Tidak ada data!</string>
   <string name="msg_failed_fetch_genres">Gagal mengambil data genre</string>
   <string name="msg_no_genre">Tidak ada genre</string>
+  <string name="msg_failed_get_movie_favorite">Gagal memuat film favorite</string>
+  <string name="msg_no_movie_favorite">Film favorite kosong</string>
+  <string name="msg_add_favorite_fail">Gagal menambahkan favorite</string>
+  <string name="msg_add_favorite_ok">Ditambahkan ke favorite</string>
+  <string name="msg_remove_favorite_fail">Gagal menghapus favorite</string>
+  <string name="msg_remove_favorite_ok">Dihapus dari favorite</string>
   
   <string name="text_setting_language">Ganti bahasa</string>
   <string name="text_heading_overview">Kilasan Singkat</string>
@@ -41,5 +49,4 @@
   <string name="text_subheading_original_language">Bahasa Asal</string>
   <string name="text_subheading_popularity">Popularitas</string>
   <string name="text_subheading_original_title">Judul Asli</string>
-
 </resources>
