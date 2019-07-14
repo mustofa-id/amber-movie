@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.mustofa.app.amber.R;
-import id.mustofa.app.amber.component.RoundedImageView;
 import id.mustofa.app.amber.data.model.Movie;
 import id.mustofa.app.amber.util.DateUtil;
 import id.mustofa.app.amber.util.ImageLoader;
@@ -72,7 +72,7 @@ class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHo
   
   class MovieViewHolder extends RecyclerView.ViewHolder {
     
-    private RoundedImageView poster;
+    private ImageView poster;
     private TextView title, date, rating, overview;
     private RatingBar ratingBar;
     

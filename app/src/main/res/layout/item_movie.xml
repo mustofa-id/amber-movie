@@ -4,7 +4,10 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_margin="@dimen/component_margin_tiny"
+  android:layout_marginTop="@dimen/component_margin_tiny"
+  android:layout_marginBottom="@dimen/component_margin_tiny"
+  android:layout_marginStart="@dimen/component_margin_medium"
+  android:layout_marginEnd="@dimen/component_margin_medium"
   android:clickable="true"
   android:focusable="true"
   android:foreground="?android:attr/selectableItemBackground"
@@ -13,10 +16,9 @@
   
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/component_margin_tiny">
+    android:layout_height="wrap_content">
     
-    <id.mustofa.app.amber.component.RoundedImageView
+    <ImageView
       android:id="@+id/img_item_movie_poster"
       android:layout_width="@dimen/image_item_movie_width"
       android:layout_height="wrap_content"

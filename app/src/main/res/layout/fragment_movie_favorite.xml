@@ -14,7 +14,10 @@
       android:id="@+id/rv_fragment_movie_favorite"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
-      android:layout_centerInParent="true" />
+      android:layout_centerInParent="true"
+      android:clipToPadding="false"
+      android:paddingTop="@dimen/component_margin_medium"
+      android:paddingBottom="@dimen/component_margin_medium" />
     
     <TextView
       android:id="@+id/er_fragment_movie_favorite"
