@@ -36,6 +36,7 @@
   <string name="msg_no_genre">Tidak ada genre</string>
   <string name="msg_failed_get_movie_favorite">Gagal memuat film favorite</string>
   <string name="msg_no_movie_favorite">Film favorite kosong</string>
+  <string name="msg_no_tv_favorite">Acara TV favorite kosong</string>
   <string name="msg_add_favorite_fail">Gagal menambahkan favorite</string>
   <string name="msg_add_favorite_ok">Ditambahkan ke favorite</string>
   <string name="msg_remove_favorite_fail">Gagal menghapus favorite</string>

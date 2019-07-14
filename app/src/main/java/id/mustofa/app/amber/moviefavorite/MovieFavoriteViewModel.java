@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.mustofa.app.amber.R;
@@ -34,14 +35,15 @@ public class MovieFavoriteViewModel extends ViewModel {
   }
   
   void start() {
-    loadMovieFavorites(mMediaType);
+    loadMovieFavorites(mMediaType, true);
   }
   
   void refresh() {
-    loadMovieFavorites(mMediaType);
+    loadMovieFavorites(mMediaType, false);
   }
   
-  private void loadMovieFavorites(MediaType type) {
+  private void loadMovieFavorites(MediaType type, boolean force) {
+    if (force) mMovieFavorites.setValue(new ArrayList<>());
     mMessageResId.postValue(0);
     mLoading.postValue(true);
     mMovieRepository.findFavoriteMovies(type, (movieFavorites, error) -> {
@@ -49,7 +51,8 @@ public class MovieFavoriteViewModel extends ViewModel {
         mMessageResId.postValue(R.string.msg_failed_get_movie_favorite);
       } else {
         if (movieFavorites.isEmpty()) {
-          mMessageResId.postValue(R.string.msg_no_movie_favorite);
+          mMessageResId.postValue(type == MediaType.MOVIE ?
+              R.string.msg_no_movie_favorite : R.string.msg_no_tv_favorite);
         } else {
           mMovieFavorites.postValue(movieFavorites);
         }
