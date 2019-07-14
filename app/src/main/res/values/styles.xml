@@ -29,10 +29,5 @@
   <style name="AppTheme.TextAppearance.TransparentText" parent="TextAppearance.AppCompat">
     <item name="android:textColor">@color/colorTransparent</item>
   </style>
-  
-  <style name="AppTheme.Button.ItemSetting" parent="Widget.AppCompat.Button.Borderless">
-    <item name="android:textAllCaps">false</item>
-    <item name="android:textColor">@color/colorDark</item>
-  </style>
 
 </resources>

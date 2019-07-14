@@ -6,8 +6,6 @@
   <string name="title_tab_movie">Film</string>
   <string name="title_tab_tv">Acara TV</string>
   <string name="title_setting">Pengaturan</string>
-  <string name="title_lang_english">English</string>
-  <string name="title_lang_indonesia">Indonesia</string>
   <string name="title_prefs_lang">Bahasa</string>
   <string name="title_movie_discover">Discover</string>
   <string name="title_movie_favorite">Favorite</string>
@@ -42,7 +40,6 @@
   <string name="msg_remove_favorite_fail">Gagal menghapus favorite</string>
   <string name="msg_remove_favorite_ok">Dihapus dari favorite</string>
   
-  <string name="text_setting_language">Ganti bahasa</string>
   <string name="text_heading_overview">Kilasan Singkat</string>
   <string name="text_heading_genres">Genre</string>
   <string name="text_heading_facts">Fakta</string>
