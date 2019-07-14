@@ -5,7 +5,7 @@ Android App Movie Catalogue For Discovering New Movies
 - Icon resource from Android Studio Image Assets Builer
 - Movie API using [The Movie DB](https://www.themoviedb.org)
 
-This app created for Submission 3 in MADE (Menjadi Android Developer Expert) class at [Dicoding Academy](https://www.dicoding.com) by [Habib Mustofa](https://www.dicoding.com/users/413434)
+This app created for Submission 4 in MADE (Menjadi Android Developer Expert) class at [Dicoding Academy](https://www.dicoding.com) by [Habib Mustofa](https://www.dicoding.com/users/413434)
 
 ## Setup
 
