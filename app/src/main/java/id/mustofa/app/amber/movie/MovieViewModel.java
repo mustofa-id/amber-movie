@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.mustofa.app.amber.R;
@@ -36,20 +37,23 @@ public class MovieViewModel extends ViewModel {
   
   void start() {
     // Maybe we want to different implementation on future
-    loadMovies(mCurrentMediaType);
+    loadMovies(mCurrentMediaType, false);
   }
   
   void refresh() {
     // Maybe we want to different implementation on future
-    loadMovies(mCurrentMediaType);
+    loadMovies(mCurrentMediaType, true);
   }
   
-  private void loadMovies(MediaType type) {
+  private void loadMovies(MediaType type, boolean force) {
+    if (force) mMovies.setValue(new ArrayList<>());
     mMessageResId.postValue(0);
     mLoading.postValue(true);
     mMovieRepository.findMovies(type, (movieList, error) -> {
       if (error != null) {
-        mMessageResId.postValue(R.string.msg_failed_fetch_movies);
+        if (mMovies.getValue() == null || mMovies.getValue().isEmpty()) {
+          mMessageResId.postValue(R.string.msg_failed_fetch_movies);
+        }
       } else {
         if (movieList.isEmpty()) {
           mMessageResId.postValue(R.string.msg_no_movie);
