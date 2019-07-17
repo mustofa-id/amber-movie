@@ -6,6 +6,12 @@
   <string name="title_tab_tv">TV Show</string>
   <string name="title_setting">Setting</string>
   <string name="title_prefs_lang">Language</string>
+  <string name="title_prefs_category_general">General</string>
+  <string name="title_prefs_category_notification">Notification</string>
+  <string name="title_prefs_category_user_control">User Control</string>
+  <string name="title_prefs_daily_reminder">Daily reminder</string>
+  <string name="title_prefs_release_today">Release today</string>
+  <string name="title_prefs_restricted_mode">Restricted mode</string>
   <string name="title_movie_discover">Discover</string>
   <string name="title_movie_favorite">Favorite</string>
   <string name="title_others">Others</string>
@@ -13,6 +19,9 @@
   <string name="desc_poster_image">Poster image</string>
   <string name="desc_backdrop_image">Backdrop image</string>
   <string name="desc_prefs_lang">Select app language</string>
+  <string name="desc_prefs_daily_reminder">Remind you to always get updates every day</string>
+  <string name="desc_prefs_release_today">Notice about today\'s latest release</string>
+  <string name="desc_prefs_restricted_mode">This helps hide potentially mature movies</string>
   <string name="desc_drawer_close">Close navigation drawer</string>
   <string name="desc_drawer_open">Open  navigation drawer</string>
   
@@ -48,6 +57,9 @@
   <string name="text_subheading_original_title">Original Title</string>
   
   <string name="key_prefs_lang" translatable="false">prefs_lang</string>
+  <string name="key_prefs_daily_reminder" translatable="false">prefs_daily_reminder</string>
+  <string name="key_prefs_release_today" translatable="false">prefs_release_today</string>
+  <string name="key_prefs_restricted_mode" translatable="false">prefs_restricted_mode</string>
   
   <string name="mock_popularity" translatable="false">442.543</string>
   <string name="mock_vote_count" translatable="false">216</string>

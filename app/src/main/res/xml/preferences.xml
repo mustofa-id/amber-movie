@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   
-  <ListPreference
-    android:entries="@array/prefs_entries_lang"
-    android:entryValues="@array/prefs_entryValues_lang"
-    android:key="@string/key_prefs_lang"
-    android:negativeButtonText="@string/action_cancel"
-    android:summary="@string/desc_prefs_lang"
-    android:title="@string/title_prefs_lang"
-    app:iconSpaceReserved="false" />
+  <PreferenceCategory android:title="@string/title_prefs_category_general">
+    
+    <ListPreference
+      android:entries="@array/prefs_entries_lang"
+      android:entryValues="@array/prefs_entryValues_lang"
+      android:icon="@drawable/ic_prefs_lang_black_24dp"
+      android:key="@string/key_prefs_lang"
+      android:negativeButtonText="@string/action_cancel"
+      android:summary="@string/desc_prefs_lang"
+      android:title="@string/title_prefs_lang" />
+  </PreferenceCategory>
+  
+  <PreferenceCategory android:title="@string/title_prefs_category_notification">
+    
+    <SwitchPreference
+      android:icon="@drawable/ic_prefs_daily_reminder_black_24dp"
+      android:key="@string/desc_prefs_daily_reminder"
+      android:summary="@string/desc_prefs_daily_reminder"
+      android:title="@string/title_prefs_daily_reminder" />
+    
+    <SwitchPreference
+      android:icon="@drawable/ic_prefs_release_today_black_24dp"
+      android:key="@string/desc_prefs_release_today"
+      android:summary="@string/desc_prefs_release_today"
+      android:title="@string/title_prefs_release_today" />
+  </PreferenceCategory>
+  
+  <PreferenceCategory android:title="@string/title_prefs_category_user_control">
+    
+    <SwitchPreference
+      android:icon="@drawable/ic_restricted_mode_black_24dp"
+      android:key="@string/desc_prefs_restricted_mode"
+      android:summary="@string/desc_prefs_restricted_mode"
+      android:title="@string/title_prefs_restricted_mode" />
+  </PreferenceCategory>
 </PreferenceScreen>

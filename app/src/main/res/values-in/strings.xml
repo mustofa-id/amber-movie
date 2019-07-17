@@ -7,6 +7,12 @@
   <string name="title_tab_tv">Acara TV</string>
   <string name="title_setting">Pengaturan</string>
   <string name="title_prefs_lang">Bahasa</string>
+  <string name="title_prefs_category_general">Umum</string>
+  <string name="title_prefs_category_notification">Notifikasi</string>
+  <string name="title_prefs_category_user_control">Kontrol Pengguna</string>
+  <string name="title_prefs_daily_reminder">Pengingat harian</string>
+  <string name="title_prefs_release_today">Rilis hari ini</string>
+  <string name="title_prefs_restricted_mode">Mode terbatas</string>
   <string name="title_movie_discover">Discover</string>
   <string name="title_movie_favorite">Favorite</string>
   <string name="title_others">Lainnya</string>
@@ -14,6 +20,9 @@
   <string name="desc_poster_image">Gambar poster</string>
   <string name="desc_backdrop_image">Gambar backdrop</string>
   <string name="desc_prefs_lang">Pilih bahasa aplikasi</string>
+  <string name="desc_prefs_daily_reminder">Ingatkan kamu untuk selalu mendapatkan update setiap hari</string>
+  <string name="desc_prefs_restricted_mode">Membantu menyembunyikan film yang berpotensi mengandung konten dewasa</string>
+  <string name="desc_prefs_release_today">Pemberitahuan tentang rilis terbaru hari ini</string>
   <string name="desc_drawer_close">Tutup navigation drawer</string>
   <string name="desc_drawer_open">Tampilkan  navigation drawer</string>
   
