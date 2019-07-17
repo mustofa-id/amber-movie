@@ -25,6 +25,7 @@ public class MovieViewModel extends ViewModel {
   private final MovieRepository mMovieRepository;
   
   private MediaType mCurrentMediaType;
+  private boolean mIncludeAdult;
   
   public MovieViewModel(MovieRepository mMovieRepository) {
     this.mMovieRepository = mMovieRepository;
@@ -33,6 +34,10 @@ public class MovieViewModel extends ViewModel {
   
   void setMediaType(MediaType type) {
     mCurrentMediaType = type;
+  }
+  
+  void setIncludeAdult(boolean includeAdult) {
+    this.mIncludeAdult = includeAdult;
   }
   
   void start() {
@@ -49,7 +54,7 @@ public class MovieViewModel extends ViewModel {
     if (force) mMovies.setValue(new ArrayList<>());
     mMessageResId.postValue(0);
     mLoading.postValue(true);
-    mMovieRepository.findMovies(type, (movieList, error) -> {
+    mMovieRepository.findMovies(type, mIncludeAdult, (movieList, error) -> {
       if (error != null) {
         if (mMovies.getValue() == null || mMovies.getValue().isEmpty()) {
           mMessageResId.postValue(R.string.msg_failed_fetch_movies);

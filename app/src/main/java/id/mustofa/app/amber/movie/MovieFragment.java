@@ -3,21 +3,27 @@ package id.mustofa.app.amber.movie;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.model.MediaType;
@@ -32,6 +38,7 @@ import id.mustofa.app.amber.util.ViewModelFactory;
 public class MovieFragment extends Fragment implements MovieItemNavigator {
   
   private static final String ARGS_MEDIA_TYPE = "MEDIA_TYPE__";
+  private SharedPreferences mPrefs;
   private MovieListAdapter mMovieListAdapter;
   private MovieViewModel mMovieViewModel;
   
@@ -54,6 +61,7 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    setupPrefs();
     setupViewModel();
     setupRecyclerViewAdapter();
     setupRefresher(view);
@@ -62,10 +70,17 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
     subscribeViewModelChange();
   }
   
+  private void setupPrefs() {
+    final Context context = Objects.requireNonNull(getContext());
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+  }
+  
   private void setupViewModel() {
     ViewModelFactory factory = ViewModelFactory.getInstance(getContext());
     mMovieViewModel = ViewModelProviders.of(this, factory).get(MovieViewModel.class);
     mMovieViewModel.setMediaType(getMediaType());
+    boolean includeAdult = !mPrefs.getBoolean(getString(R.string.key_prefs_restricted_mode), false);
+    mMovieViewModel.setIncludeAdult(includeAdult);
     mMovieViewModel.start();
   }
   

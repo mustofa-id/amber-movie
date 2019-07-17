@@ -35,9 +35,9 @@ public final class MovieRepository {
     this.mMovieLocalDao = mMovieLocalDao;
   }
   
-  public void findMovies(@NonNull MediaType mediaType, @NonNull ResultListener<List<Movie>> listener) {
+  public void findMovies(@NonNull MediaType mediaType, boolean includeAdult, @NonNull ResultListener<List<Movie>> listener) {
     final List<Movie> movies = new ArrayList<>();
-    final Call<MovieWrapper> serviceMovies = mMovieRemoteDao.getDiscovers(mediaType.getValue());
+    final Call<MovieWrapper> serviceMovies = mMovieRemoteDao.getDiscovers(mediaType.getValue(), includeAdult);
     
     serviceMovies.enqueue(new Callback<MovieWrapper>() {
       @Override
