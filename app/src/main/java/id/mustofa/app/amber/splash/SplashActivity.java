@@ -23,14 +23,18 @@ public class SplashActivity extends AppCompatActivity {
   }
   
   private void setupDefaultPrefs() {
+    final String initializedKey = "initialized";
     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    SharedPreferences.Editor editor = prefs.edit();
-    editor.putString(getString(R.string.key_prefs_lang),
-        getResources().getStringArray(R.array.prefs_entryValues_lang)[0]);
-    editor.putBoolean(getString(R.string.key_prefs_daily_reminder), true);
-    editor.putBoolean(getString(R.string.key_prefs_release_today), true);
-    editor.putBoolean(getString(R.string.key_prefs_restricted_mode), true);
-    editor.apply();
+    if (!prefs.contains(initializedKey)) {
+      SharedPreferences.Editor editor = prefs.edit();
+      editor.putBoolean(initializedKey, true);
+      editor.putString(getString(R.string.key_prefs_lang),
+          getResources().getStringArray(R.array.prefs_entryValues_lang)[0]);
+      editor.putBoolean(getString(R.string.key_prefs_daily_reminder), true);
+      editor.putBoolean(getString(R.string.key_prefs_release_today), true);
+      editor.putBoolean(getString(R.string.key_prefs_restricted_mode), true);
+      editor.apply();
+    }
   }
   
   private void startMovieActivity() {
