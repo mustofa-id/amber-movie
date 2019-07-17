@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -127,12 +126,6 @@ public class MainActivity extends BaseAppCompatActivity
     Toast.makeText(this, R.string.msg_confirm_close, Toast.LENGTH_SHORT).show();
     new Handler().postDelayed(() -> mCloseable = false, 2000);
     mCloseable = true;
-  }
-  
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-    return super.onCreateOptionsMenu(menu);
   }
   
   @Override

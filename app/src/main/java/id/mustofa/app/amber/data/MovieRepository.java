@@ -58,6 +58,29 @@ public final class MovieRepository {
     });
   }
   
+  public void findMoviesByQuery(@NonNull MediaType mediaType, String query, @NonNull ResultListener<List<Movie>> listener) {
+    final List<Movie> movies = new ArrayList<>();
+    final Call<MovieWrapper> serviceMovies = mMovieRemoteDao.searchMovies(mediaType.getValue(), query);
+    
+    serviceMovies.enqueue(new Callback<MovieWrapper>() {
+      @Override
+      public void onResponse(@NonNull Call<MovieWrapper> call, @NonNull Response<MovieWrapper> response) {
+        final MovieWrapper movieWrapper = response.body();
+        if (movieWrapper != null) {
+          final List<Movie> results = movieWrapper.getResults();
+          if (results != null) movies.addAll(results);
+        }
+        listener.onResult(movies, null);
+      }
+      
+      @Override
+      public void onFailure(@NonNull Call<MovieWrapper> call, @NonNull Throwable t) {
+        Log.wtf(TAG, "onFailure: ", t);
+        listener.onResult(movies, t);
+      }
+    });
+  }
+  
   public void findGenres(@NonNull MediaType type, @NonNull ResultListener<List<Genre>> listener) {
     final List<Genre> genres = new ArrayList<>();
     final Call<Genre.Wrapper> serviceGenres = mMovieRemoteDao.getGenres(type.getValue());

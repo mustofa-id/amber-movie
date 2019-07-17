@@ -31,6 +31,8 @@
   <string name="action_search">Pencarian</string>
   <string name="action_favorite">Favorite</string>
   <string name="action_favorite_added">Hapus favorite</string>
+  <string name="action_search_hint_movie">Cari film…</string>
+  <string name="action_search_hint_tv">Cari acara tv…</string>
   
   <string name="error_unknown">Terjadi kesalahan!</string>
   

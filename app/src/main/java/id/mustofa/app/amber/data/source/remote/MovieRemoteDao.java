@@ -19,4 +19,7 @@ public interface MovieRemoteDao {
   
   @GET("genre/{type}/list?language=en-US&api_key=" + BuildConfig.MOVIEDB_API_KEY)
   Call<Genre.Wrapper> getGenres(@Path("type") String type);
+  
+  @GET("search/{type}?language=en-US&api_key=" + BuildConfig.MOVIEDB_API_KEY)
+  Call<MovieWrapper> searchMovies(@Path("type") String type, @Query("query") String query);
 }

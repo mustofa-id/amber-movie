@@ -41,13 +41,31 @@ public class MovieViewModel extends ViewModel {
   }
   
   void start() {
-    // Maybe we want to different implementation on future
     loadMovies(mCurrentMediaType, false);
   }
   
   void refresh() {
-    // Maybe we want to different implementation on future
     loadMovies(mCurrentMediaType, true);
+  }
+  
+  void searchMovies(String query) {
+    mMovies.setValue(new ArrayList<>());
+    mMessageResId.postValue(0);
+    mLoading.postValue(true);
+    mMovieRepository.findMoviesByQuery(mCurrentMediaType, query, (movieList, error) -> {
+      if (error != null) {
+        if (mMovies.getValue() == null || mMovies.getValue().isEmpty()) {
+          mMessageResId.postValue(R.string.msg_failed_fetch_movies);
+        }
+      } else {
+        if (movieList.isEmpty()) {
+          mMessageResId.postValue(R.string.msg_no_movie);
+        } else {
+          mMovies.postValue(movieList);
+        }
+      }
+      mLoading.postValue(false);
+    });
   }
   
   private void loadMovies(MediaType type, boolean force) {

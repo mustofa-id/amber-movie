@@ -1,6 +1,7 @@
 package id.mustofa.app.amber.movie;
 
 
+import android.app.SearchManager;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -16,8 +17,11 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,6 +65,7 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    setHasOptionsMenu(true);
     setupPrefs();
     setupViewModel();
     setupRecyclerViewAdapter();
@@ -68,6 +73,50 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
     setupInfo(view);
     setupRecyclerView(view);
     subscribeViewModelChange();
+  }
+  
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    inflater.inflate(R.menu.menu_fragment_movie, menu);
+    setupSearchView(menu);
+    super.onCreateOptionsMenu(menu, inflater);
+  }
+  
+  private void setupSearchView(Menu menu) {
+    if (getActivity() == null) return;
+    final SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+    if (searchManager != null) {
+      MenuItem searchItem = menu.findItem(R.id.act_main_search);
+      SearchView searchView = (SearchView) searchItem.getActionView();
+      searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+      searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        
+        // for prevent default action
+        private boolean tick = false;
+        
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+          mMovieViewModel.searchMovies(query);
+          return true;
+        }
+        
+        @Override
+        public boolean onQueryTextChange(String newText) {
+          if (newText.isEmpty() && tick) mMovieViewModel.refresh();
+          tick = true;
+          return true;
+        }
+      });
+      
+      searchView.setOnCloseListener(() -> {
+        mMovieViewModel.refresh();
+        return true;
+      });
+      
+      int hint = getMediaType() == MediaType.MOVIE ?
+          R.string.action_search_hint_movie : R.string.action_search_hint_tv;
+      searchView.setQueryHint(getString(hint));
+    }
   }
   
   private void setupPrefs() {
