@@ -1,10 +1,12 @@
 package id.mustofa.app.amber.splash;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 
+import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.main.MainActivity;
 
 /**
@@ -16,7 +18,19 @@ public class SplashActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    new Handler().postDelayed(this::startMovieActivity, 800); // Fake loading in 0.8s
+    setupDefaultPrefs();
+    startMovieActivity();
+  }
+  
+  private void setupDefaultPrefs() {
+    final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    SharedPreferences.Editor editor = prefs.edit();
+    editor.putString(getString(R.string.key_prefs_lang),
+        getResources().getStringArray(R.array.prefs_entryValues_lang)[0]);
+    editor.putBoolean(getString(R.string.key_prefs_daily_reminder), true);
+    editor.putBoolean(getString(R.string.key_prefs_release_today), true);
+    editor.putBoolean(getString(R.string.key_prefs_restricted_mode), true);
+    editor.apply();
   }
   
   private void startMovieActivity() {

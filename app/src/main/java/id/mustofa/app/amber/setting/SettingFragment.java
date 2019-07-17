@@ -13,7 +13,7 @@ import id.mustofa.app.amber.R;
  */
 public class SettingFragment extends PreferenceFragmentCompat {
   
-  private String mKeyLang;
+  private String mKeyLang, mKeyRestrictedMode;
   private SharedPreferences mPreferences;
   private SettingActionListener mActionListener;
   
@@ -34,6 +34,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
   
   private void setupPreferences() {
     mKeyLang = getString(R.string.key_prefs_lang);
+    mKeyRestrictedMode = getString(R.string.key_prefs_restricted_mode);
   }
   
   @Override
@@ -49,9 +50,9 @@ public class SettingFragment extends PreferenceFragmentCompat {
   }
   
   private void onPrefsChanged(@SuppressWarnings("unused") SharedPreferences prefs, String key) {
-    if (key.equals(mKeyLang) && getActivity() != null) {
-      if (mActionListener != null) mActionListener.onPreferenceChanged(true);
-    }
+    final boolean forceViewUpdate = getActivity() != null &&
+        (key.equals(mKeyLang) || key.equals(mKeyRestrictedMode));
+    if (mActionListener != null) mActionListener.onPreferenceChanged(forceViewUpdate);
   }
   
   @Override

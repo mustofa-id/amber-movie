@@ -17,13 +17,13 @@
     
     <SwitchPreference
       android:icon="@drawable/ic_prefs_daily_reminder_black_24dp"
-      android:key="@string/desc_prefs_daily_reminder"
+      android:key="@string/key_prefs_daily_reminder"
       android:summary="@string/desc_prefs_daily_reminder"
       android:title="@string/title_prefs_daily_reminder" />
     
     <SwitchPreference
       android:icon="@drawable/ic_prefs_release_today_black_24dp"
-      android:key="@string/desc_prefs_release_today"
+      android:key="@string/key_prefs_release_today"
       android:summary="@string/desc_prefs_release_today"
       android:title="@string/title_prefs_release_today" />
   </PreferenceCategory>
@@ -32,7 +32,7 @@
     
     <SwitchPreference
       android:icon="@drawable/ic_restricted_mode_black_24dp"
-      android:key="@string/desc_prefs_restricted_mode"
+      android:key="@string/key_prefs_restricted_mode"
       android:summary="@string/desc_prefs_restricted_mode"
       android:title="@string/title_prefs_restricted_mode" />
   </PreferenceCategory>
