@@ -48,6 +48,7 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   
   private SwipeRefreshLayout mSrRefresher;
   private TextView mTextInfo;
+  private SearchView mSearchView;
   
   public static MovieFragment newInstance(MediaType type) {
     MovieFragment movieFragment = new MovieFragment();
@@ -87,9 +88,9 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
     final SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
     if (searchManager != null) {
       MenuItem searchItem = menu.findItem(R.id.act_main_search);
-      SearchView searchView = (SearchView) searchItem.getActionView();
-      searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-      searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+      mSearchView = (SearchView) searchItem.getActionView();
+      mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+      mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
         
         // for prevent default action
         private boolean tick = false;
@@ -107,15 +108,15 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
           return true;
         }
       });
-      
-      searchView.setOnCloseListener(() -> {
+  
+      mSearchView.setOnCloseListener(() -> {
         mMovieViewModel.refresh();
         return true;
       });
       
       int hint = getMediaType() == MediaType.MOVIE ?
           R.string.action_search_hint_movie : R.string.action_search_hint_tv;
-      searchView.setQueryHint(getString(hint));
+      mSearchView.setQueryHint(getString(hint));
     }
   }
   
@@ -140,7 +141,11 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   
   private void setupRefresher(@NonNull View view) {
     mSrRefresher = view.findViewById(R.id.sr_fragment_movie);
-    mSrRefresher.setOnRefreshListener(mMovieViewModel::refresh);
+    mSrRefresher.setOnRefreshListener(() -> {
+      mMovieViewModel.refresh();
+      mSearchView.setIconified(true);
+      mSearchView.clearFocus();
+    });
   }
   
   private void setupRecyclerViewAdapter() {
