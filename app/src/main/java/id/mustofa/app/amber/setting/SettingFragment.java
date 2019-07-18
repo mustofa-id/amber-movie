@@ -17,6 +17,17 @@ public class SettingFragment extends PreferenceFragmentCompat {
   private SharedPreferences mPreferences;
   private SettingActionListener mActionListener;
   
+  //  SharedPreferences using WeakHashMap for listener. It work at first, but sometimes not because
+  //  listener will get garbage collected if we use listener as anonymous inner class.
+  //  Official docs said to `keep a reference to the listener in the instance data of an object.`
+  //
+  //  Docs: https://developer.android.com/reference/android/content/SharedPreferences.html
+  private SharedPreferences.OnSharedPreferenceChangeListener mPrefsChangeListener = (prefs, key) -> {
+    final boolean forceViewUpdate = getActivity() != null &&
+        (key.equals(mKeyLang) || key.equals(mKeyRestrictedMode));
+    if (mActionListener != null) mActionListener.onPreferenceChanged(forceViewUpdate);
+  };
+  
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
@@ -32,27 +43,21 @@ public class SettingFragment extends PreferenceFragmentCompat {
     setupPreferences();
   }
   
+  @Override
+  public void onResume() {
+    super.onResume();
+    mPreferences.registerOnSharedPreferenceChangeListener(mPrefsChangeListener);
+  }
+  
   private void setupPreferences() {
     mKeyLang = getString(R.string.key_prefs_lang);
     mKeyRestrictedMode = getString(R.string.key_prefs_restricted_mode);
   }
   
   @Override
-  public void onResume() {
-    super.onResume();
-    mPreferences.registerOnSharedPreferenceChangeListener(this::onPrefsChanged);
-  }
-  
-  @Override
   public void onPause() {
     super.onPause();
-    mPreferences.unregisterOnSharedPreferenceChangeListener(this::onPrefsChanged);
-  }
-  
-  private void onPrefsChanged(@SuppressWarnings("unused") SharedPreferences prefs, String key) {
-    final boolean forceViewUpdate = getActivity() != null &&
-        (key.equals(mKeyLang) || key.equals(mKeyRestrictedMode));
-    if (mActionListener != null) mActionListener.onPreferenceChanged(forceViewUpdate);
+    mPreferences.unregisterOnSharedPreferenceChangeListener(mPrefsChangeListener);
   }
   
   @Override
