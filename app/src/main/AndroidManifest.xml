@@ -3,7 +3,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="id.mustofa.app.amber">
   
-  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   
   <application
     android:allowBackup="true"
@@ -13,7 +14,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-    
+  
+    <!--Activities-->
     <activity
       android:name=".splash.SplashActivity"
       android:theme="@style/AppTheme.Splash">
@@ -35,6 +37,15 @@
     <activity
       android:name=".setting.SettingActivity"
       android:label="@string/title_setting" />
+  
+    <!--Receivers-->
+    <receiver
+      android:name=".notification.NotificationReceiver"
+      android:enabled="false">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+      </intent-filter>
+    </receiver>
   </application>
 
 </manifest>

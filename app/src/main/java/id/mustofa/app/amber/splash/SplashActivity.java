@@ -8,6 +8,7 @@ import android.support.v7.preference.PreferenceManager;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.main.MainActivity;
+import id.mustofa.app.amber.notification.NotificationAction;
 
 /**
  * @author Habib Mustofa
@@ -34,7 +35,14 @@ public class SplashActivity extends AppCompatActivity {
       editor.putBoolean(getString(R.string.key_prefs_release_today), true);
       editor.putBoolean(getString(R.string.key_prefs_restricted_mode), true);
       editor.apply();
+      setupNotification();
     }
+  }
+  
+  private void setupNotification() {
+    NotificationAction notificationAction = new NotificationAction(this);
+    notificationAction.setDailyReminderEnabled(true);
+    notificationAction.setReleaseTodayEnabled(true);
   }
   
   private void startMovieActivity() {

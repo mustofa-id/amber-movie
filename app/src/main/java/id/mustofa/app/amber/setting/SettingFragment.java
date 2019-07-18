@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import id.mustofa.app.amber.R;
+import id.mustofa.app.amber.notification.NotificationAction;
 
 /**
  * @author Habib Mustofa
@@ -13,9 +14,10 @@ import id.mustofa.app.amber.R;
  */
 public class SettingFragment extends PreferenceFragmentCompat {
   
-  private String mKeyLang, mKeyRestrictedMode;
+  private String mKeyLang, mKeyDailyReminder, mKeyReleaseToday, mKeyRestrictedMode;
   private SharedPreferences mPreferences;
   private SettingActionListener mActionListener;
+  private NotificationAction mNotificationAction;
   
   //  SharedPreferences using WeakHashMap for listener. It work at first, but sometimes not because
   //  listener will get garbage collected if we use listener as anonymous inner class.
@@ -23,6 +25,14 @@ public class SettingFragment extends PreferenceFragmentCompat {
   //
   //  Docs: https://developer.android.com/reference/android/content/SharedPreferences.html
   private SharedPreferences.OnSharedPreferenceChangeListener mPrefsChangeListener = (prefs, key) -> {
+    if (mNotificationAction != null) {
+      if (key.equals(mKeyDailyReminder)) {
+        mNotificationAction.setDailyReminderEnabled(prefs.getBoolean(mKeyDailyReminder, false));
+      } else if (key.equals(mKeyReleaseToday)) {
+        mNotificationAction.setReleaseTodayEnabled(prefs.getBoolean(mKeyReleaseToday, false));
+      }
+    }
+    
     final boolean forceViewUpdate = getActivity() != null &&
         (key.equals(mKeyLang) || key.equals(mKeyRestrictedMode));
     if (mActionListener != null) mActionListener.onPreferenceChanged(forceViewUpdate);
@@ -41,6 +51,13 @@ public class SettingFragment extends PreferenceFragmentCompat {
     addPreferencesFromResource(R.xml.preferences);
     mPreferences = getPreferenceScreen().getSharedPreferences();
     setupPreferences();
+    setupNotificationAction();
+  }
+  
+  private void setupNotificationAction() {
+    if (getContext() != null) {
+      mNotificationAction = new NotificationAction(getContext());
+    }
   }
   
   @Override
@@ -51,6 +68,8 @@ public class SettingFragment extends PreferenceFragmentCompat {
   
   private void setupPreferences() {
     mKeyLang = getString(R.string.key_prefs_lang);
+    mKeyDailyReminder = getString(R.string.key_prefs_daily_reminder);
+    mKeyReleaseToday = getString(R.string.key_prefs_release_today);
     mKeyRestrictedMode = getString(R.string.key_prefs_restricted_mode);
   }
   
