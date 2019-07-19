@@ -51,6 +51,9 @@
   <string name="msg_add_favorite_ok">Ditambahkan ke favorite</string>
   <string name="msg_remove_favorite_fail">Gagal menghapus favorite</string>
   <string name="msg_remove_favorite_ok">Dihapus dari favorite</string>
+  <plurals name="msg_release_today_notification_text">
+    <item quantity="other">%d film baru</item>
+  </plurals>
   
   <string name="text_heading_overview">Kilasan Singkat</string>
   <string name="text_heading_genres">Genre</string>

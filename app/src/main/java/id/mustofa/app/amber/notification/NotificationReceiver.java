@@ -1,5 +1,6 @@
 package id.mustofa.app.amber.notification;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,8 @@ import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
+import id.mustofa.app.amber.moviedetail.MovieDetailActivity;
+import id.mustofa.app.amber.splash.SplashActivity;
 import id.mustofa.app.amber.util.DateUtil;
 import id.mustofa.app.amber.util.Injection;
 import id.mustofa.app.amber.util.NotificationBuilder;
@@ -64,14 +67,18 @@ public class NotificationReceiver extends BroadcastReceiver {
     NotificationBuilder notification = new NotificationBuilder(context)
         .withChannel(CHANNEL_ID, CHANNEL_NAME)
         .applyDefault();
+  
+    PendingIntent pendingIntent = getMainPendingIntent(context, 0);
+    
     notification.getBuilder()
         .setContentTitle(context.getString(R.string.title_prefs_daily_reminder))
-        .setContentText(context.getString(R.string.desc_daily_reminder_notification_text));
+        .setContentText(context.getString(R.string.desc_daily_reminder_notification_text))
+        .setContentIntent(pendingIntent);
     notification.push(9999);
   }
   
   private void pushReleaseTodayNotification(Context context, List<Movie> movies) {
-    int maxNotify = movies.size() - 1;
+    int maxNotify = movies.size();
     int idNotify = 0;
     String groupNotify = "ReleaseToday";
     NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle()
@@ -79,34 +86,49 @@ public class NotificationReceiver extends BroadcastReceiver {
     NotificationBuilder notification;
     for (Movie movie : movies) {
       style.addLine(movie.getTitle());
-      if (idNotify < maxNotify) {
+      if (idNotify < maxNotify - 1) {
         notification = new NotificationBuilder(context)
             .withChannel(CHANNEL_ID, CHANNEL_NAME)
             .applyDefault();
+    
+        Intent intent = new Intent(context, MovieDetailActivity.class);
+        intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_TYPE, MediaType.MOVIE);
+        intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ITEM, movie);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, idNotify, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        
         notification.getBuilder()
             .setContentTitle(movie.getTitle())
             .setContentText(movie.getOverview())
-            .setGroup(groupNotify);
+            .setGroup(groupNotify)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent);
+        
         notification.push(idNotify);
       } else {
+    
         notification = new NotificationBuilder(context)
             .withChannel(CHANNEL_ID, CHANNEL_NAME)
             .applyDefault();
-        
-        // TODO: Extract to string with english type
-        final String contentText = String.format("%s new movie release", idNotify);
+    
+        final String contentText = context.getResources()
+            .getQuantityString(R.plurals.msg_release_today_notification_text, maxNotify, maxNotify);
+        PendingIntent pendingIntent = getMainPendingIntent(context, idNotify);
         style.setBigContentTitle(contentText);
+    
         notification.getBuilder()
             .setContentTitle(movie.getTitle())
-            .setContentText(contentText) // support devices running API level < 24
+            .setContentText(contentText) // style#setSummaryText support for devices running API level < 24
             .setStyle(style)
             .setGroup(groupNotify)
-            .setGroupSummary(true);
+            .setGroupSummary(true)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent);
+        
         notification.push(maxNotify);
       }
       idNotify++;
     }
-    
   }
   
   private void fetchMovieReleaseToday(Context context) {
@@ -121,13 +143,26 @@ public class NotificationReceiver extends BroadcastReceiver {
         Iterator<Movie> moviesIt = result.iterator();
         while (moviesIt.hasNext()) {
           Movie movie = moviesIt.next();
+          // Filter releaseDate only match today
           if (!movie.getReleaseDate().equals(today)) {
             moviesIt.remove();
           }
         }
-        if (!result.isEmpty()) pushReleaseTodayNotification(context, result);
+  
+        if (!result.isEmpty()) {
+          // Limit list 50 because notification (in default Android System) is limited to 50
+          // com.android.server.notification.NotificationManagerService.MAX_PACKAGE_NOTIFICATIONS
+          List<Movie> movies = result.size() > 50 ? result.subList(0, 50) : result;
+          pushReleaseTodayNotification(context, movies);
+        }
       }
     });
+  }
+  
+  private PendingIntent getMainPendingIntent(Context context, int reqCode) {
+    Intent intent = new Intent(context, SplashActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    return PendingIntent.getActivity(context, reqCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
   }
   
   private void resetNotificationSetting(Context context) {

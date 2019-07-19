@@ -22,8 +22,8 @@ public class NotificationAction {
   static final String TYPE_RELEASE_TODAY = "RELEASE_TODAY_";
   
   private static final String TAG = NotificationAction.class.getName();
-  private static final int[] DAILY_REMINDER_TIME = {7, 26}; // hours, minutes
-  private static final int[] RELEASE_TODAY_TIME = {7, 27}; // hours, minutes
+  private static final int[] DAILY_REMINDER_TIME = {7, 0}; // hours, minutes
+  private static final int[] RELEASE_TODAY_TIME = {8, 0}; // hours, minutes
   private static final int DAILY_REMINDER_REQ_CODE = 107;
   private static final int RELEASE_TODAY_REQ_CODE = 108;
   
@@ -51,10 +51,9 @@ public class NotificationAction {
   public void setReleaseTodayEnabled(boolean state) {
     if (state) {
       Calendar calendar = Calendar.getInstance();
-//      calendar.set(Calendar.HOUR_OF_DAY, RELEASE_TODAY_TIME[0]);
-//      calendar.set(Calendar.MINUTE, RELEASE_TODAY_TIME[1]);
-//      calendar.set(Calendar.SECOND, 0);
-      calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND) + 10); // TODO: REMOVE THIS
+      calendar.set(Calendar.HOUR_OF_DAY, RELEASE_TODAY_TIME[0]);
+      calendar.set(Calendar.MINUTE, RELEASE_TODAY_TIME[1]);
+      calendar.set(Calendar.SECOND, 0);
       setAlarm(calendar, RELEASE_TODAY_REQ_CODE, TYPE_RELEASE_TODAY);
     } else {
       cancelAlarm(RELEASE_TODAY_REQ_CODE);
