@@ -14,15 +14,20 @@ import java.util.Locale;
 public class DateUtil {
   
   private static final String TAG = DateUtil.class.getName();
+  private static final String DATE_API_FORMAT = "yyyy-MM-dd";
   
   public static String reformatDate(String source, String newFormat) {
     try {
-      String formatFromApi = "yyyy-MM-dd";
-      Date parse = new SimpleDateFormat(formatFromApi, Locale.getDefault()).parse(source);
+      Date parse = new SimpleDateFormat(DATE_API_FORMAT, Locale.getDefault()).parse(source);
       return new SimpleDateFormat(newFormat, Locale.getDefault()).format(parse);
     } catch (ParseException e) {
       Log.w(TAG, "Fail perform reformatDate: ", e);
       return source;
     }
+  }
+  
+  public static String format(Date date) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_API_FORMAT, Locale.getDefault());
+    return dateFormat.format(date);
   }
 }

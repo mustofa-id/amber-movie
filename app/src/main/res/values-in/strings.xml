@@ -25,6 +25,7 @@
   <string name="desc_prefs_release_today">Pemberitahuan tentang rilis terbaru hari ini</string>
   <string name="desc_drawer_close">Tutup navigation drawer</string>
   <string name="desc_drawer_open">Tampilkan  navigation drawer</string>
+  <string name="desc_daily_reminder_notification_text">Ga kangen nih? Cek yaa!</string>
   
   <string name="action_settings">Pengaturan</string>
   <string name="action_cancel">Batal</string>

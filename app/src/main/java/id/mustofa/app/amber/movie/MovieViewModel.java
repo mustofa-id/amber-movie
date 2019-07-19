@@ -6,11 +6,15 @@ import android.arch.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
+
+import static id.mustofa.app.amber.util.QueryHelper.Params;
+import static id.mustofa.app.amber.util.QueryHelper.createQuery;
 
 /**
  * @author Habib Mustofa
@@ -25,7 +29,7 @@ public class MovieViewModel extends ViewModel {
   private final MovieRepository mMovieRepository;
   
   private MediaType mCurrentMediaType;
-  private boolean mIncludeAdult;
+  private String mIncludeAdult;
   
   public MovieViewModel(MovieRepository mMovieRepository) {
     this.mMovieRepository = mMovieRepository;
@@ -37,7 +41,7 @@ public class MovieViewModel extends ViewModel {
   }
   
   void setIncludeAdult(boolean includeAdult) {
-    this.mIncludeAdult = includeAdult;
+    this.mIncludeAdult = String.valueOf(includeAdult);
   }
   
   void start() {
@@ -49,10 +53,13 @@ public class MovieViewModel extends ViewModel {
   }
   
   void searchMovies(String query) {
+    Map<String, String> queryParams = createQuery(
+        Params.QUERY, query
+    );
     mMovies.setValue(new ArrayList<>());
     mMessageResId.postValue(0);
     mLoading.postValue(true);
-    mMovieRepository.findMoviesByQuery(mCurrentMediaType, query, (movieList, error) -> {
+    mMovieRepository.findMoviesByQuery(mCurrentMediaType, queryParams, (movieList, error) -> {
       if (error != null) {
         if (mMovies.getValue() == null || mMovies.getValue().isEmpty()) {
           mMessageResId.postValue(R.string.msg_failed_fetch_movies);
@@ -69,10 +76,15 @@ public class MovieViewModel extends ViewModel {
   }
   
   private void loadMovies(MediaType type, boolean force) {
+    Map<String, String> queryParams = createQuery(
+        Params.INCLUDE_ADULT, mIncludeAdult,
+        Params.PAGE, "1"
+    );
+    
     if (force) mMovies.setValue(new ArrayList<>());
     mMessageResId.postValue(0);
     mLoading.postValue(true);
-    mMovieRepository.findMovies(type, mIncludeAdult, (movieList, error) -> {
+    mMovieRepository.findMovies(type, queryParams, (movieList, error) -> {
       if (error != null) {
         if (mMovies.getValue() == null || mMovies.getValue().isEmpty()) {
           mMessageResId.postValue(R.string.msg_failed_fetch_movies);

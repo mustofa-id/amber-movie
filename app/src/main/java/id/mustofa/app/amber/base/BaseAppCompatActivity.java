@@ -10,7 +10,7 @@ import id.mustofa.app.amber.util.LocaleHelper;
  * @author Habib Mustofa
  * Indonesia on 08/07/19.
  *
- * This base activity trigger on create
+ * This base activity trigger on createQuery
  */
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
   

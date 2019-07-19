@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -35,9 +36,11 @@ public final class MovieRepository {
     this.mMovieLocalDao = mMovieLocalDao;
   }
   
-  public void findMovies(@NonNull MediaType mediaType, boolean includeAdult, @NonNull ResultListener<List<Movie>> listener) {
+  public void findMovies(@NonNull MediaType mediaType,
+                         Map<String, String> params,
+                         @NonNull ResultListener<List<Movie>> listener) {
     final List<Movie> movies = new ArrayList<>();
-    final Call<MovieWrapper> serviceMovies = mMovieRemoteDao.getDiscovers(mediaType.getValue(), includeAdult);
+    final Call<MovieWrapper> serviceMovies = mMovieRemoteDao.getDiscovers(mediaType.getValue(), params);
     
     serviceMovies.enqueue(new Callback<MovieWrapper>() {
       @Override
@@ -58,9 +61,11 @@ public final class MovieRepository {
     });
   }
   
-  public void findMoviesByQuery(@NonNull MediaType mediaType, String query, @NonNull ResultListener<List<Movie>> listener) {
+  public void findMoviesByQuery(@NonNull MediaType mediaType,
+                                Map<String, String> params,
+                                @NonNull ResultListener<List<Movie>> listener) {
     final List<Movie> movies = new ArrayList<>();
-    final Call<MovieWrapper> serviceMovies = mMovieRemoteDao.searchMovies(mediaType.getValue(), query);
+    final Call<MovieWrapper> serviceMovies = mMovieRemoteDao.searchMovies(mediaType.getValue(), params);
     
     serviceMovies.enqueue(new Callback<MovieWrapper>() {
       @Override

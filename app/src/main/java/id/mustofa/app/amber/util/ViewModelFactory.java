@@ -6,10 +6,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import id.mustofa.app.amber.data.MovieRepository;
-import id.mustofa.app.amber.data.source.local.AppDatabase;
-import id.mustofa.app.amber.data.source.local.MovieLocalDao;
-import id.mustofa.app.amber.data.source.remote.ApiClient;
-import id.mustofa.app.amber.data.source.remote.MovieRemoteDao;
 import id.mustofa.app.amber.movie.MovieViewModel;
 import id.mustofa.app.amber.moviedetail.MovieDetailViewModel;
 import id.mustofa.app.amber.moviefavorite.MovieFavoriteViewModel;
@@ -28,7 +24,7 @@ public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory
     if (svInstance == null) {
       synchronized (ViewModelFactory.class) {
         if (svInstance == null) {
-          svInstance = new ViewModelFactory(provideMovieRepository(context));
+          svInstance = new ViewModelFactory(Injection.provideMovieRepository(context));
         }
       }
     }
@@ -37,12 +33,6 @@ public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory
   
   private ViewModelFactory(MovieRepository movieRepository) {
     this.mMovieRepository = movieRepository;
-  }
-  
-  private static MovieRepository provideMovieRepository(@NonNull Context context) {
-    final MovieRemoteDao movieRemoteDao = ApiClient.retrofit().create(MovieRemoteDao.class);
-    final MovieLocalDao movieLocalDao = AppDatabase.getInstance(context).movieLocalDao();
-    return new MovieRepository(movieRemoteDao, movieLocalDao);
   }
   
   @NonNull
