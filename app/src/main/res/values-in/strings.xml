@@ -13,6 +13,7 @@
   <string name="title_prefs_daily_reminder">Pengingat harian</string>
   <string name="title_prefs_release_today">Rilis hari ini</string>
   <string name="title_prefs_restricted_mode">Mode terbatas</string>
+  <string name="title_prefs_more_notification">Pengaturan lain notifikasi</string>
   <string name="title_movie_discover">Discover</string>
   <string name="title_movie_favorite">Favorite</string>
   <string name="title_others">Lainnya</string>
@@ -23,6 +24,7 @@
   <string name="desc_prefs_daily_reminder">Ingatkan kamu untuk selalu mendapatkan update setiap hari</string>
   <string name="desc_prefs_restricted_mode">Membantu menyembunyikan film yang berpotensi mengandung konten dewasa</string>
   <string name="desc_prefs_release_today">Pemberitahuan tentang rilis terbaru hari ini</string>
+  <string name="desc_prefs_more_notification">Atur notifikasi sistem untuk aplikasi ini</string>
   <string name="desc_drawer_close">Tutup navigation drawer</string>
   <string name="desc_drawer_open">Tampilkan  navigation drawer</string>
   <string name="desc_daily_reminder_notification_text">Ga kangen nih? Cek yaa!</string>

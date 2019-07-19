@@ -1,9 +1,14 @@
 package id.mustofa.app.amber.setting;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.widget.Toast;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.notification.NotificationAction;
@@ -71,6 +76,28 @@ public class SettingFragment extends PreferenceFragmentCompat {
     mKeyDailyReminder = getString(R.string.key_prefs_daily_reminder);
     mKeyReleaseToday = getString(R.string.key_prefs_release_today);
     mKeyRestrictedMode = getString(R.string.key_prefs_restricted_mode);
+    
+    String mKeyMoreNotification = getString(R.string.key_prefs_more_notification);
+    Preference mMoreNotification = findPreference(mKeyMoreNotification);
+    mMoreNotification.setOnPreferenceClickListener(prefs -> openMoreNotification());
+  }
+  
+  private boolean openMoreNotification() {
+    if (getContext() == null) {
+      Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    Intent intent = new Intent();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+      intent.putExtra(Settings.EXTRA_APP_PACKAGE, getContext().getPackageName());
+    } else {
+      intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+      intent.putExtra("app_package", getContext().getPackageName());
+      intent.putExtra("app_uid", getContext().getApplicationInfo().uid);
+    }
+    getContext().startActivity(intent);
+    return true;
   }
   
   @Override

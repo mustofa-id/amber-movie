@@ -26,6 +26,11 @@
       android:key="@string/key_prefs_release_today"
       android:summary="@string/desc_prefs_release_today"
       android:title="@string/title_prefs_release_today" />
+  
+    <Preference
+      android:key="@string/key_prefs_more_notification"
+      android:summary="@string/desc_prefs_more_notification"
+      android:title="@string/title_prefs_more_notification" />
   </PreferenceCategory>
   
   <PreferenceCategory android:title="@string/title_prefs_category_user_control">

@@ -12,6 +12,7 @@
   <string name="title_prefs_daily_reminder">Daily reminder</string>
   <string name="title_prefs_release_today">Release today</string>
   <string name="title_prefs_restricted_mode">Restricted mode</string>
+  <string name="title_prefs_more_notification">More notification settings</string>
   <string name="title_movie_discover">Discover</string>
   <string name="title_movie_favorite">Favorite</string>
   <string name="title_others">Others</string>
@@ -22,6 +23,7 @@
   <string name="desc_prefs_daily_reminder">Remind you to always get updates every morning</string>
   <string name="desc_prefs_release_today">Notice about today\'s latest release</string>
   <string name="desc_prefs_restricted_mode">This helps hide potentially mature movies</string>
+  <string name="desc_prefs_more_notification">Configure system notification for this app</string>
   <string name="desc_drawer_close">Close navigation drawer</string>
   <string name="desc_drawer_open">Open  navigation drawer</string>
   <string name="desc_daily_reminder_notification_text">Do you miss me? Check me out!</string>
@@ -67,6 +69,7 @@
   <string name="key_prefs_daily_reminder" translatable="false">prefs_daily_reminder</string>
   <string name="key_prefs_release_today" translatable="false">prefs_release_today</string>
   <string name="key_prefs_restricted_mode" translatable="false">prefs_restricted_mode</string>
+  <string name="key_prefs_more_notification" translatable="false">prefs_more_notification</string>
   
   <string name="mock_popularity" translatable="false">442.543</string>
   <string name="mock_vote_count" translatable="false">216</string>
