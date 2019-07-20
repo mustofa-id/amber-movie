@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">Amber Movie Favorite</string>
+  
+  <string name="title_main_activity">Favorite</string>
 </resources>

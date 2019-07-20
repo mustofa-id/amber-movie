@@ -51,10 +51,10 @@ public class NotificationAction {
   public void setReleaseTodayEnabled(boolean state) {
     if (state) {
       Calendar calendar = Calendar.getInstance();
-//      calendar.set(Calendar.HOUR_OF_DAY, RELEASE_TODAY_TIME[0]);
-//      calendar.set(Calendar.MINUTE, RELEASE_TODAY_TIME[1]);
-//      calendar.set(Calendar.SECOND, 0);
-      calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND) + 10); // TODO: REMOVE THIS
+      calendar.set(Calendar.HOUR_OF_DAY, RELEASE_TODAY_TIME[0]);
+      calendar.set(Calendar.MINUTE, RELEASE_TODAY_TIME[1]);
+      calendar.set(Calendar.SECOND, 0);
+//      calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND) + 10); // TODO: REMOVE THIS
       setAlarm(calendar, RELEASE_TODAY_REQ_CODE, TYPE_RELEASE_TODAY);
     } else {
       cancelAlarm(RELEASE_TODAY_REQ_CODE);

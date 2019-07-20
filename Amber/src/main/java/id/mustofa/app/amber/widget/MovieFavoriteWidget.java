@@ -64,7 +64,7 @@ public class MovieFavoriteWidget extends AppWidgetProvider {
         Intent movieDetailIntent = new Intent(context, MovieDetailActivity.class);
         movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ITEM, movie);
         movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_TYPE, MediaType.MOVIE);
-        movieDetailIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        movieDetailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(movieDetailIntent);
       }
     }
