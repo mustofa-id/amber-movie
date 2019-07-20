@@ -28,7 +28,7 @@ public class ImageLoader {
     RequestOptions options = new RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .placeholder(placeholder(context))
-        .error(R.drawable.ic_warning_black_24dp);
+        .error(R.drawable.img_no_image_available);
     
     Glide.with(context)
         .asBitmap()
@@ -47,7 +47,7 @@ public class ImageLoader {
       // Synchronously fetch image
       return builder.submit().get();
     } catch (ExecutionException | InterruptedException e) {
-      return BitmapFactory.decodeResource(context.getResources(), R.drawable.img_mock_poster);
+      return BitmapFactory.decodeResource(context.getResources(), R.drawable.img_no_image_available);
     }
   }
   

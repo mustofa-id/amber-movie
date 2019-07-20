@@ -17,6 +17,7 @@
   <string name="title_movie_discover">Discover</string>
   <string name="title_movie_favorite">Favorite</string>
   <string name="title_others">Lainnya</string>
+  <string name="title_widget_movie_favorite_title">Film Favorite Ku</string>
   
   <string name="desc_poster_image">Gambar poster</string>
   <string name="desc_backdrop_image">Gambar backdrop</string>

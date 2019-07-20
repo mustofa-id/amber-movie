@@ -21,9 +21,10 @@
     <ImageView
       android:id="@+id/img_item_movie_favorite_poster"
       android:layout_width="@dimen/image_item_movie_width"
-      android:layout_height="wrap_content"
+      android:layout_height="@dimen/image_item_movie_height"
       android:adjustViewBounds="true"
       android:contentDescription="@string/desc_poster_image"
+      android:scaleType="centerCrop"
       app:srcCompat="@drawable/img_mock_poster" />
     
     <RatingBar

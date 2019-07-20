@@ -70,8 +70,8 @@ public class MainActivity extends BaseAppCompatActivity
   }
   
   private void setupDrawer() {
-    mDrawer = findViewById(R.id.drawer_layout);
-    mNavigationView = findViewById(R.id.nav_view);
+    mDrawer = findViewById(R.id.drawer_layout_main);
+    mNavigationView = findViewById(R.id.nav_main);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
         mDrawer, mToolbar, R.string.desc_drawer_open, R.string.desc_drawer_close);
     mDrawer.addDrawerListener(toggle);

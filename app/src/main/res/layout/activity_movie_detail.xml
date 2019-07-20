@@ -8,7 +8,7 @@
   tools:context=".moviedetail.MovieDetailActivity">
   
   <android.support.design.widget.AppBarLayout
-    android:id="@+id/app_bar"
+    android:id="@+id/appbar_movie_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
@@ -99,7 +99,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/component_padding_medium"
-    app:layout_anchor="@id/app_bar"
+    app:layout_anchor="@id/appbar_movie_detail"
     app:layout_anchorGravity="bottom|end"
     app:srcCompat="@drawable/ic_play_light_24dp" />
 

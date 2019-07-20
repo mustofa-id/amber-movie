@@ -13,7 +13,7 @@
   </style>
   
   <style name="AppTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="android:windowBackground">@drawable/splash_background</item>
+    <item name="android:windowBackground">@drawable/bg_splash</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
   </style>
   
@@ -28,6 +28,14 @@
   
   <style name="AppTheme.TextAppearance.TransparentText" parent="TextAppearance.AppCompat">
     <item name="android:textColor">@color/colorTransparent</item>
+  </style>
+  
+  <style name="AppTheme.TextAppearance.WidgetItemTitle" parent="TextAppearance.AppCompat">
+    <item name="android:background">@color/colorTransparentBlack</item>
+    <item name="android:padding">@dimen/component_margin_small</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:maxLines">1</item>
   </style>
 
 </resources>

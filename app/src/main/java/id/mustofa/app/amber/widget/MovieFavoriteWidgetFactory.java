@@ -58,7 +58,12 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
     // AppWidgetTarget imageTarget = new AppWidgetTarget(mContext, R.id.imageView, views, mAppWidgetId);
     // MovieFavorite movie = mMovieFavorites.get(position);
     // ImageLoader.load(mContext, movie.getPosterPath(), imageTarget);
-    views.setImageViewBitmap(R.id.imageView, mData.get(position).poster);
+    DataHolder data = mData.get(position);
+    if (data != null) {
+      views.setImageViewBitmap(R.id.img_item_widget_movie_favorite_poster, data.poster);
+      views.setImageViewBitmap(R.id.img_item_widget_movie_favorite_backdrop, data.poster);
+      views.setTextViewText(R.id.text_item_widget_movie_favorite_title, data.movieFavorite.getTitle());
+    }
     return views;
   }
   

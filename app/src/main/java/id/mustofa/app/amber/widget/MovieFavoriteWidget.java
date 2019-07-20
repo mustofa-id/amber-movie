@@ -22,8 +22,8 @@ public class MovieFavoriteWidget extends AppWidgetProvider {
     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
     intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
     RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_movie_favorite);
-    views.setRemoteAdapter(R.id.stack_view, intent);
-    views.setEmptyView(R.id.stack_view, R.id.empty_view);
+    views.setRemoteAdapter(R.id.stack_widget_favorite_movies, intent);
+    views.setEmptyView(R.id.stack_widget_favorite_movies, R.id.text_widget_favorite_empty_view);
     appWidgetManager.updateAppWidget(appWidgetId, views);
   }
   
@@ -31,7 +31,7 @@ public class MovieFavoriteWidget extends AppWidgetProvider {
     AppWidgetManager manager = AppWidgetManager.getInstance(context);
     ComponentName movieFavoriteWidget = new ComponentName(context, MovieFavoriteWidget.class);
     int[] widgetIds = manager.getAppWidgetIds(movieFavoriteWidget);
-    manager.notifyAppWidgetViewDataChanged(widgetIds, R.id.stack_view);
+    manager.notifyAppWidgetViewDataChanged(widgetIds, R.id.stack_widget_favorite_movies);
   }
   
   @Override

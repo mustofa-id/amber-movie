@@ -44,7 +44,9 @@
       </intent-filter>
     </receiver>
   
-    <receiver android:name=".widget.MovieFavoriteWidget">
+    <receiver
+      android:name=".widget.MovieFavoriteWidget"
+      android:label="@string/title_widget_movie_favorite_title">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
       </intent-filter>

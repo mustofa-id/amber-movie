@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:orientation="vertical">
+  android:layout_height="220dp"
+  android:background="@android:color/white"
+  android:padding="@dimen/component_margin_tiny">
   
   <ImageView
-    android:id="@+id/imageView"
+    android:id="@+id/img_item_widget_movie_favorite_backdrop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:adjustViewBounds="true"
-    android:contentDescription="@string/app_name"
-    android:scaleType="fitCenter"
-    tools:srcCompat="@drawable/widget_preview_movie_favorite" />
-</LinearLayout>
+    android:contentDescription="@string/desc_backdrop_image"
+    android:scaleType="centerCrop"
+    tools:srcCompat="@drawable/img_mock_poster" />
+  
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackdrop"
+    android:gravity="center">
+    
+    <ImageView
+      android:id="@+id/img_item_widget_movie_favorite_poster"
+      android:layout_width="100dp"
+      android:layout_height="180dp"
+      android:contentDescription="@string/desc_poster_image"
+      android:paddingBottom="@dimen/component_margin_medium"
+      tools:srcCompat="@drawable/img_mock_poster" />
+  </LinearLayout>
+  
+  <TextView
+    android:id="@+id/text_item_widget_movie_favorite_title"
+    style="@style/AppTheme.TextAppearance.WidgetItemTitle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/img_item_widget_movie_favorite_backdrop"
+    tools:text="@string/mock_title" />
+</RelativeLayout>

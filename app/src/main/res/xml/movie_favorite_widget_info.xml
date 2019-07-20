@@ -2,9 +2,9 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
   android:initialKeyguardLayout="@layout/widget_movie_favorite"
   android:initialLayout="@layout/widget_movie_favorite"
-  android:minWidth="250dp"
-  android:minHeight="110dp"
-  android:previewImage="@drawable/widget_preview_movie_favorite"
+  android:minWidth="320dp"
+  android:minHeight="180dp"
+  android:previewImage="@drawable/img_widget_preview_movie_favorite"
   android:resizeMode="horizontal|vertical"
   android:updatePeriodMillis="0"
   android:widgetCategory="home_screen" />

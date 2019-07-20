@@ -3,44 +3,37 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
   
+  <TextView
+    android:id="@+id/text_widget_favorite_empty_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/colorTransparentBlack"
+    android:gravity="center"
+    android:text="@string/msg_no_movie_favorite"
+    android:textColor="@android:color/white" />
+  
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10">
     
-    <StackView
-      android:id="@+id/stack_view"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_weight="9"
-      android:loopViews="true" />
-    
     <TextView
-      android:id="@+id/banner_text"
+      android:id="@+id/text_widget_favorite_banner"
+      style="@style/AppTheme.TextAppearance.WidgetItemTitle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:layout_weight="1"
-      android:background="@color/colorPrimaryDark"
-      android:text="@string/appwidget_text"
-      android:textAlignment="center"
-      android:textColor="#ffffff"
-      android:textSize="20sp"
-      android:textStyle="bold" />
+      android:text="@string/title_widget_movie_favorite_title" />
+    
+    <StackView
+      android:id="@+id/stack_widget_favorite_movies"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="9"
+      android:loopViews="true" />
   </LinearLayout>
-  
-  <TextView
-    android:id="@+id/empty_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@color/colorAccent"
-    android:text="Kosong!"
-    android:textAlignment="center"
-    android:textColor="#ffffff"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    android:visibility="gone" />
 
 </FrameLayout>

@@ -5,4 +5,5 @@
   <color name="colorAccent">#ffdd4b</color>
   <color name="colorTransparent">#00646464</color>
   <color name="colorBackdrop">#E6646464</color>
+  <color name="colorTransparentBlack">#72000000</color>
 </resources>
