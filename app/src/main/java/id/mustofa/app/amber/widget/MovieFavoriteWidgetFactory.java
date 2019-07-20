@@ -1,6 +1,7 @@
 package id.mustofa.app.amber.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
@@ -63,6 +64,10 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
       views.setImageViewBitmap(R.id.img_item_widget_movie_favorite_poster, data.poster);
       views.setImageViewBitmap(R.id.img_item_widget_movie_favorite_backdrop, data.poster);
       views.setTextViewText(R.id.text_item_widget_movie_favorite_title, data.movieFavorite.getTitle());
+  
+      Intent intent = new Intent();
+      intent.putExtra(MovieFavoriteWidget.EXTRA_ITEM, data.movieFavorite);
+      views.setOnClickFillInIntent(R.id.parent_item_widget_movie_favorite, intent);
     }
     return views;
   }
