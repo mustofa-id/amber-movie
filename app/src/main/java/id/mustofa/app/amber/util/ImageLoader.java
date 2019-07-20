@@ -1,12 +1,17 @@
 package id.mustofa.app.amber.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.widget.CircularProgressDrawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+
+import java.util.concurrent.ExecutionException;
 
 import id.mustofa.app.amber.R;
 
@@ -27,9 +32,27 @@ public class ImageLoader {
     
     Glide.with(context)
         .asBitmap()
-        .load(String.format(BASE_IMAGE_URL, IMAGE_SIZE, path))
+        .load(getUrl(path))
         .apply(options)
         .into(target);
+  }
+  
+  public static Bitmap getBitmap(Context context, String path) {
+    RequestBuilder<Bitmap> builder = Glide.with(context)
+        .asBitmap()
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .load(getUrl(path));
+    
+    try {
+      // Synchronously fetch image
+      return builder.submit().get();
+    } catch (ExecutionException | InterruptedException e) {
+      return BitmapFactory.decodeResource(context.getResources(), R.drawable.img_mock_poster);
+    }
+  }
+  
+  private static String getUrl(String path) {
+    return String.format(BASE_IMAGE_URL, IMAGE_SIZE, path);
   }
   
   private static CircularProgressDrawable placeholder(Context context) {

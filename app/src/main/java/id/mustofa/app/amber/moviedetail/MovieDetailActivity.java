@@ -26,13 +26,14 @@ import id.mustofa.app.amber.data.model.MovieFavorite;
 import id.mustofa.app.amber.util.DateUtil;
 import id.mustofa.app.amber.util.ImageLoader;
 import id.mustofa.app.amber.util.ViewModelFactory;
+import id.mustofa.app.amber.widget.MovieFavoriteWidget;
 
 /**
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
 public class MovieDetailActivity extends BaseAppCompatActivity {
-  
+  // TODO: Add list reviewers, similar movies, etc.
   public static final String EXTRA_MOVIE_ITEM = "MOVIE_ITEM__";
   public static final String EXTRA_MOVIE_TYPE = "MOVIE_TYPE__";
   
@@ -78,8 +79,10 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
       onBackPressed();
     } else if (id == mMenuFavorite.getItemId()) {
       mMovieDetailViewModel.addToFavorite(movie);
+      updateMovieFavoriteWidget();
     } else if (id == mMenuRemoveFavorite.getItemId()) {
       mMovieDetailViewModel.removeFromFavorite(movie);
+      updateMovieFavoriteWidget();
     }
     return super.onOptionsItemSelected(item);
   }
@@ -138,6 +141,10 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
     mTextOriginalLang.setText(mMovie.getOriginalLanguage());
     mRateRating.setRating(mMovie.getVoteAverage() / 2);
     mTextOverview.setText(mMovie.getOverview());
+  }
+  
+  private void updateMovieFavoriteWidget() {
+    MovieFavoriteWidget.notifyDataChanged(this);
   }
   
   private void onGenresLoaded(List<Genre> genres) {

@@ -15,7 +15,7 @@
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning">
   
-    <!--Activities-->
+    <!-- Activities -->
     <activity
       android:name=".splash.SplashActivity"
       android:theme="@style/AppTheme.Splash">
@@ -25,20 +25,17 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    
     <activity
       android:name=".main.MainActivity"
       android:theme="@style/AppTheme.NoActionBar" />
-    
     <activity
       android:name=".moviedetail.MovieDetailActivity"
       android:theme="@style/AppTheme.MaterialNoActionBar" />
-    
     <activity
       android:name=".setting.SettingActivity"
       android:label="@string/title_setting" />
   
-    <!--Receivers-->
+    <!-- Receivers -->
     <receiver
       android:name=".notification.NotificationReceiver"
       android:enabled="false">
@@ -46,6 +43,21 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
+  
+    <receiver android:name=".widget.MovieFavoriteWidget">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/movie_favorite_widget_info" />
+    </receiver>
+  
+    <!--Services-->
+    <service
+      android:name=".widget.MovieFavoriteWidgetService"
+      android:exported="false"
+      android:permission="android.permission.BIND_REMOTEVIEWS" />
   </application>
 
 </manifest>

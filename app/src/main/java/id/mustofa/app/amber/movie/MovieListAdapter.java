@@ -23,7 +23,7 @@ import id.mustofa.app.amber.util.ImageLoader;
  * Indonesia on 06/07/19.
  */
 class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
-  
+  // TODO: Infinite scroll please
   private final List<Movie> mListMovie = new ArrayList<>();
   private MovieItemNavigator mMovieItemNavigator;
   
