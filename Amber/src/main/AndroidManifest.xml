@@ -6,6 +6,8 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   
+  <permission android:name="id.mustofa.app.amber.provider.READ_WRITE" />
+  
   <application
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
@@ -14,7 +16,7 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-  
+    
     <!-- Activities -->
     <activity
       android:name=".splash.SplashActivity"
@@ -34,7 +36,7 @@
     <activity
       android:name=".setting.SettingActivity"
       android:label="@string/title_setting" />
-  
+    
     <!-- Receivers -->
     <receiver
       android:name=".notification.NotificationReceiver"
@@ -43,7 +45,7 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
-  
+    
     <receiver
       android:name=".widget.MovieFavoriteWidget"
       android:label="@string/title_widget_movie_favorite_title">
@@ -54,12 +56,19 @@
         android:name="android.appwidget.provider"
         android:resource="@xml/movie_favorite_widget_info" />
     </receiver>
-  
+    
     <!--Services-->
     <service
       android:name=".widget.MovieFavoriteWidgetService"
       android:exported="false"
       android:permission="android.permission.BIND_REMOTEVIEWS" />
+    
+    <!--Providers-->
+    <provider
+      android:name=".provider.MovieFavoriteProvider"
+      android:authorities="id.mustofa.app.amber.provider"
+      android:exported="true"
+      android:permission="id.mustofa.app.amber.provider.READ_WRITE" />
   </application>
 
 </manifest>

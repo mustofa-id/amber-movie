@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.database.Cursor;
 
 import java.util.List;
 
@@ -27,4 +28,14 @@ public interface MovieLocalDao {
   
   @Delete
   int deleteFavorite(MovieFavorite movie);
+  
+  // ContentProvider support
+  @Query("SELECT * FROM favorite_movie")
+  Cursor selectAllFavorites();
+  
+  @Query("SELECT * FROM favorite_movie WHERE id=:id")
+  Cursor selectFavoriteById(long id);
+  
+  @Query("DELETE FROM favorite_movie WHERE id=:id")
+  int deleteFavoriteById(long id);
 }
