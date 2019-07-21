@@ -16,33 +16,41 @@ import id.mustofa.app.amber.notification.NotificationAction;
  */
 public class SplashActivity extends AppCompatActivity {
   
+  private static final String PREFS_INITIAL_KEY = "initialized";
+  private static final boolean PREFS_DEFAULT_DAILY_REMINDER = false;
+  private static final boolean PREFS_DEFAULT_RELEASE_TODAY = false;
+  
+  private boolean mIsFirstSetup = false;
+  
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setupDefaultPrefs();
+    setupNotification();
     startMovieActivity();
   }
   
   private void setupDefaultPrefs() {
-    final String initializedKey = "initialized";
     final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    if (!prefs.contains(initializedKey)) {
+    if (!prefs.contains(PREFS_INITIAL_KEY)) {
       SharedPreferences.Editor editor = prefs.edit();
-      editor.putBoolean(initializedKey, true);
+      editor.putBoolean(PREFS_INITIAL_KEY, true);
       editor.putString(getString(R.string.key_prefs_lang),
           getResources().getStringArray(R.array.prefs_entryValues_lang)[0]);
-      editor.putBoolean(getString(R.string.key_prefs_daily_reminder), true);
-      editor.putBoolean(getString(R.string.key_prefs_release_today), true);
+      editor.putBoolean(getString(R.string.key_prefs_daily_reminder), PREFS_DEFAULT_DAILY_REMINDER);
+      editor.putBoolean(getString(R.string.key_prefs_release_today), PREFS_DEFAULT_RELEASE_TODAY);
       editor.putBoolean(getString(R.string.key_prefs_restricted_mode), true);
       editor.apply();
-      setupNotification();
+      mIsFirstSetup = true;
     }
   }
   
   private void setupNotification() {
-    NotificationAction notificationAction = new NotificationAction(this);
-    notificationAction.setDailyReminderEnabled(true);
-    notificationAction.setReleaseTodayEnabled(true);
+    if (mIsFirstSetup) {
+      NotificationAction notificationAction = new NotificationAction(this);
+      notificationAction.setDailyReminderEnabled(PREFS_DEFAULT_DAILY_REMINDER);
+      notificationAction.setReleaseTodayEnabled(PREFS_DEFAULT_RELEASE_TODAY);
+    }
   }
   
   private void startMovieActivity() {
