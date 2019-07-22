@@ -13,7 +13,7 @@ public class DataContract {
   private static final String AUTHORITY = "id.mustofa.app.amber.provider";
   private static final String TABLE_NAME = "favorite_movie";
   
-  static final Uri URI_MOVIE = new Uri.Builder()
+  public static final Uri URI_MOVIE = new Uri.Builder()
       .scheme(SCHEME)
       .authority(AUTHORITY)
       .appendPath(TABLE_NAME)

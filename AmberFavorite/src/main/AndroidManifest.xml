@@ -28,7 +28,9 @@
     <activity
       android:name=".main.MainActivity"
       android:label="@string/title_main_activity" />
-    <activity android:name=".detail.DetailActivity" />
+    <activity
+      android:name=".detail.DetailActivity"
+      android:label="@string/title_detail_activity" />
   </application>
 
 </manifest>

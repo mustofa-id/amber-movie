@@ -1,5 +1,16 @@
 <resources>
-  <string name="app_name">Amber Movie Favorite</string>
+  <string name="app_name" translatable="false">Amber Movie Favorite</string>
   
   <string name="title_main_activity">Favorite</string>
+  <string name="title_detail_activity">Detail Movie</string>
+  <string name="title_play_trailer">Play Trailer</string>
+  <string name="title_remove_favorite">Remove Favorite</string>
+  
+  <string name="desc_image_poster">Image poster</string>
+  <string name="desc_no_data">No favorite data!</string>
+  
+  <string name="action_show_all">Show all</string>
+  <string name="action_tv_show">Tv Show</string>
+  <string name="action_movie">Movie</string>
+  <string name="desc_image_backdrop">Image backdrop</string>
 </resources>

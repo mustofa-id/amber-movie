@@ -39,7 +39,8 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
   
   @Override
   public void onDataSetChanged() {
-    final List<MovieFavorite> favorites = movieLocalDao.findFavoriteByType(MediaType.MOVIE.getValue());
+    final String type = MediaType.MOVIE.getValue();
+    final List<MovieFavorite> favorites = movieLocalDao.findFavoriteByType(type);
     mData.clear();
     for (MovieFavorite movie : favorites) {
       Bitmap bitmap = ImageLoader.getBitmap(mContext, movie.getPosterPath());
@@ -100,8 +101,8 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
     movieLocalDao = null;
   }
   
-  // Helper class for fetch bitmap synchronously on dataSetChanged
-  // Will make getViewAt load fast
+  // Helper class for hold bitmap that fetched synchronously
+  // on dataSetChanged will make getViewAt load fast
   private class DataHolder {
     
     private MovieFavorite movieFavorite;

@@ -4,5 +4,22 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".main.MainActivity">
-
+  
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/rv_main_movies"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:padding="8dp" />
+  
+  <TextView
+    android:id="@+id/text_main_empty_data"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:padding="@dimen/view_distance_medium"
+    android:text="@string/desc_no_data"
+    android:textAlignment="center"
+    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+    android:visibility="gone" />
 </RelativeLayout>

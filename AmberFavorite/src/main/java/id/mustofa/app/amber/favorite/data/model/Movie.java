@@ -1,9 +1,11 @@
 package id.mustofa.app.amber.favorite.data.model;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import static id.mustofa.app.amber.favorite.data.DataContract.COLUMN;
+import static id.mustofa.app.amber.favorite.data.DataContract.URI_MOVIE;
 import static id.mustofa.app.amber.favorite.data.DataContract.getColumn;
 
 /**
@@ -104,6 +106,10 @@ public class Movie {
   
   public String getType() {
     return type;
+  }
+  
+  public Uri getUri() {
+    return Uri.parse(URI_MOVIE + "/" + id);
   }
   
   // TODO: REMOVE THIS

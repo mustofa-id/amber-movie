@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
-
-</RelativeLayout>
+  android:layout_height="@dimen/item_poster_height"
+  android:layout_margin="@dimen/view_distance_small"
+  android:clickable="true"
+  android:focusable="true"
+  android:foreground="?android:attr/selectableItemBackground">
+  
+  <ImageView
+    android:id="@+id/img_item_movie_poster"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/desc_image_poster"
+    android:scaleType="centerCrop" />
+  
+  <TextView
+    android:id="@+id/text_item_movie_rating"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTransparent"
+    android:drawableStart="@drawable/ic_star_light_24dp"
+    android:padding="@dimen/view_distance_tiny"
+    android:textColor="@android:color/white" />
+  
+  <TextView
+    android:id="@+id/text_item_movie_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|bottom"
+    android:background="@drawable/bg_poster_title"
+    android:maxLines="1"
+    android:padding="@dimen/view_distance_medium"
+    android:textAlignment="center"
+    android:textColor="@android:color/white" />
+</FrameLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="view_distance_tiny">2dp</dimen>
+  <dimen name="view_distance_small">4dp</dimen>
+  <dimen name="view_distance_medium">8dp</dimen>
+  <dimen name="item_poster_height">183dp</dimen>
+  <dimen name="view_distance_normal">16dp</dimen>
+  <dimen name="view_elevation_normal">8dp</dimen>
+</resources>

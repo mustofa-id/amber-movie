@@ -95,7 +95,8 @@ public class DataAccessAsync {
     @Override
     protected void onPostExecute(R r) {
       super.onPostExecute(r);
-      mCallback.get().onResult(r);
+      Callback<R> callback = mCallback.get();
+      if (callback != null) callback.onResult(r);
     }
   }
 }

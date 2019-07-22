@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_main_activity">Favorite</string>
+  <string name="title_detail_activity">Detail Film</string>
+  <string name="title_play_trailer">Putar Trailer</string>
+  <string name="title_remove_favorite">Hapus Favorite</string>
+  
+  <string name="desc_no_data">No favorite data!</string>
+  <string name="desc_image_poster">Gambar poster</string>
+  
+  <string name="action_movie">Film</string>
+  <string name="action_show_all">Semua Film</string>
+  <string name="action_tv_show">Acara Tv</string>
+  <string name="desc_image_backdrop">Image backdrop</string>
+</resources>
