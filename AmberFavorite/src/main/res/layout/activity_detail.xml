@@ -11,7 +11,6 @@
     android:orientation="vertical">
     
     <FrameLayout
-      android:id="@+id/container_detail_1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/colorPrimary">
@@ -37,7 +36,6 @@
           android:paddingTop="84dp">
           
           <Button
-            android:id="@+id/btn_detail_remove_favorite"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +47,6 @@
             android:textColor="@android:color/white" />
           
           <Button
-            android:id="@+id/btn_detail_play_trailer"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
