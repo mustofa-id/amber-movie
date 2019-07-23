@@ -156,6 +156,7 @@ public class MovieFragment extends Fragment implements MovieItemNavigator {
   private void setupRecyclerView(@NonNull View view) {
     RecyclerView recyclerView = view.findViewById(R.id.rv_fragment_movie);
     recyclerView.setHasFixedSize(true);
+    recyclerView.setItemViewCacheSize(20);
     // Using grid layout with 2 cols span on landscape
     int orientation = getResources().getConfiguration().orientation;
     if (orientation == Configuration.ORIENTATION_PORTRAIT) {
