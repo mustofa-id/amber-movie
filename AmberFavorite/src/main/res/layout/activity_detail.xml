@@ -83,12 +83,12 @@
           tools:src="@drawable/img_mock_poster" />
         
         <TextView
-          android:id="@+id/tv_detail_title"
+          android:id="@+id/text_detail_movie_title"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_above="@+id/rt_detail_rating"
           android:layout_toEndOf="@id/img_detail_poster"
-          android:maxLines="1"
+          android:maxLines="2"
           android:textColor="@android:color/white"
           android:textSize="20sp"
           tools:text="The Movie Title" />
@@ -103,22 +103,49 @@
           android:isIndicator="true"
           android:numStars="5"
           android:paddingBottom="@dimen/view_distance_small"
-          android:rating="3.5"
-          android:stepSize="1.0" />
+          android:stepSize="1.0"
+          tools:rating="3.5" />
       </RelativeLayout>
     </FrameLayout>
-    
-    <LinearLayout
+  
+    <TextView
+      style="@style/TextAppearance.AppCompat.Subhead"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:padding="@dimen/view_distance_medium">
-      
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Overview" />
-    
-    </LinearLayout>
+      android:layout_marginStart="@dimen/view_distance_normal"
+      android:layout_marginTop="@dimen/view_distance_medium"
+      android:layout_marginEnd="@dimen/view_distance_normal"
+      android:text="@string/overview" />
+  
+    <TextView
+      android:id="@+id/text_detail_movie_overview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="@dimen/view_distance_normal"
+      android:layout_marginEnd="@dimen/view_distance_normal"
+      android:layout_marginBottom="@dimen/view_distance_medium" />
+  
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@android:color/darker_gray" />
+  
+    <TextView
+      style="@style/TextAppearance.AppCompat.Subhead"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="@dimen/view_distance_normal"
+      android:layout_marginTop="@dimen/view_distance_medium"
+      android:layout_marginEnd="@dimen/view_distance_normal"
+      android:text="@string/details" />
+  
+    <TextView
+      android:id="@+id/text_detail_movie_details"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="@dimen/view_distance_normal"
+      android:layout_marginEnd="@dimen/view_distance_normal"
+      android:layout_marginBottom="@dimen/view_distance_medium" />
+
   </LinearLayout>
 </ScrollView>

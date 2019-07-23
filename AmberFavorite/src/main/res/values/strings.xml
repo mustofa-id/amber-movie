@@ -5,12 +5,26 @@
   <string name="title_detail_activity">Detail Movie</string>
   <string name="title_play_trailer">Play Trailer</string>
   <string name="title_remove_favorite">Remove Favorite</string>
+  <string name="title_original_title">Original Title:&#160;</string>
+  <string name="title_release_date">Release Date:&#160;</string>
+  <string name="title_popularity">Popularity:&#160;</string>
+  <string name="title_vote_count">Vote Count:&#160;</string>
+  <string name="title_vote_average">Vote Average:&#160;</string>
+  <string name="title_original_lang">Original Language:&#160;</string>
   
   <string name="desc_image_poster">Image poster</string>
   <string name="desc_no_data">No favorite data!</string>
+  <string name="desc_image_backdrop">Image backdrop</string>
   
   <string name="action_show_all">Show all</string>
   <string name="action_tv_show">Tv Show</string>
   <string name="action_movie">Movie</string>
-  <string name="desc_image_backdrop">Image backdrop</string>
+  
+  <string name="overview">Overview</string>
+  <string name="details">Details</string>
+  
+  <string name="msg_remove_ok">Removed from favorite</string>
+  <string name="mgs_remove_fail">Failed to remove</string>
+  <string name="msg_load_movie_fail">Can\'t load movie data!</string>
+  <string name="msg_playing_trailer">Playing trailer…</string>
 </resources>

@@ -4,12 +4,26 @@
   <string name="title_detail_activity">Detail Film</string>
   <string name="title_play_trailer">Putar Trailer</string>
   <string name="title_remove_favorite">Hapus Favorite</string>
+  <string name="title_original_title">Judul Asli:&#160;</string>
+  <string name="title_release_date">Tanggal Rilis:&#160;</string>
+  <string name="title_popularity">Popularitas:&#160;</string>
+  <string name="title_vote_count">Jumlah Vote:&#160;</string>
+  <string name="title_vote_average">Rata-rata Vote:&#160;</string>
+  <string name="title_original_lang">Bahasa Asli:&#160;</string>
   
-  <string name="desc_no_data">No favorite data!</string>
+  <string name="desc_no_data">Tidak ada data favorite!</string>
   <string name="desc_image_poster">Gambar poster</string>
+  <string name="desc_image_backdrop">Gambar backdrop</string>
   
   <string name="action_movie">Film</string>
   <string name="action_show_all">Semua Film</string>
   <string name="action_tv_show">Acara Tv</string>
-  <string name="desc_image_backdrop">Image backdrop</string>
+  
+  <string name="overview">Kilasan singkat</string>
+  <string name="details">Detail</string>
+  
+  <string name="msg_remove_ok">Dihapus dari favorite</string>
+  <string name="mgs_remove_fail">Gagal menghapus favorite</string>
+  <string name="msg_load_movie_fail">Tidak dapat menampilkan data film!</string>
+  <string name="msg_playing_trailer">Memutar trailer…</string>
 </resources>

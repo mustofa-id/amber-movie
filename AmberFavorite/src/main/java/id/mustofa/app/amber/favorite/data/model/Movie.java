@@ -2,7 +2,6 @@ package id.mustofa.app.amber.favorite.data.model;
 
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 
 import static id.mustofa.app.amber.favorite.data.DataContract.COLUMN;
 import static id.mustofa.app.amber.favorite.data.DataContract.URI_MOVIE;
@@ -110,28 +109,5 @@ public class Movie {
   
   public Uri getUri() {
     return Uri.parse(URI_MOVIE + "/" + id);
-  }
-  
-  // TODO: REMOVE THIS
-  @NonNull
-  @Override
-  public String toString() {
-    return "Movie{" +
-        "id=" + id +
-        ", title='" + title + '\'' +
-        ", originalTitle='" + originalTitle + '\'' +
-        ", posterPath='" + posterPath + '\'' +
-        ", backdropPath='" + backdropPath + '\'' +
-        ", releaseDate='" + releaseDate + '\'' +
-        ", popularity=" + popularity +
-        ", voteCount=" + voteCount +
-        ", voteAverage=" + voteAverage +
-        ", overview='" + overview + '\'' +
-        ", originalLanguage='" + originalLanguage + '\'' +
-        ", originCountry='" + originCountry + '\'' +
-        ", genreIds='" + genreIds + '\'' +
-        ", adult=" + adult +
-        ", type='" + type + '\'' +
-        '}';
   }
 }
