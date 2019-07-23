@@ -60,12 +60,12 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
     // AppWidgetTarget imageTarget = new AppWidgetTarget(mContext, R.id.imageView, views, mAppWidgetId);
     // MovieFavorite movie = mMovieFavorites.get(position);
     // ImageLoader.load(mContext, movie.getPosterPath(), imageTarget);
-    DataHolder data = mData.get(position);
-    if (data != null) {
+    if (!mData.isEmpty()) {
+      DataHolder data = mData.get(position);
       views.setImageViewBitmap(R.id.img_item_widget_movie_favorite_poster, data.poster);
       views.setImageViewBitmap(R.id.img_item_widget_movie_favorite_backdrop, data.poster);
       views.setTextViewText(R.id.text_item_widget_movie_favorite_title, data.movieFavorite.getTitle());
-  
+    
       Intent intent = new Intent();
       intent.putExtra(MovieFavoriteWidget.EXTRA_ITEM, data.movieFavorite);
       views.setOnClickFillInIntent(R.id.parent_item_widget_movie_favorite, intent);
@@ -85,8 +85,8 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
   
   @Override
   public long getItemId(int position) {
+    if (mData.isEmpty()) return position;
     MovieFavorite favorite = mData.get(position).movieFavorite;
-    if (favorite == null) return position;
     return favorite.getId();
   }
   

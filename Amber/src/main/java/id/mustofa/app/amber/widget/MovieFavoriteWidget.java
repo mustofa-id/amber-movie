@@ -23,7 +23,7 @@ public class MovieFavoriteWidget extends AppWidgetProvider {
   public static final String ACTION_ITEM_CLICK = "ITEM_CLICK_ACTION_";
   public static final String EXTRA_ITEM = "ITEM_MOVIE_FAVORITE_";
   
-  static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+  private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
     Intent intent = new Intent(context, MovieFavoriteWidgetService.class);
     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
     intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
