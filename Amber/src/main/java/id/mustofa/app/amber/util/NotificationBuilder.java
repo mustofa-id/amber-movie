@@ -3,6 +3,7 @@ package id.mustofa.app.amber.util;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -20,7 +21,7 @@ import id.mustofa.app.amber.R;
 public class NotificationBuilder {
   
   private static final String TAG = NotificationBuilder.class.getName();
-  private static final long[] VIBRATE_PATTERN = new long[]{800, 1000, 800, 1000, 800};
+  private static final long[] VIBRATE_PATTERN = new long[]{0, 200, 50, 200, 50, 800};
   
   private final Context mContext;
   private final NotificationManager mNotificationManager;
@@ -47,7 +48,8 @@ public class NotificationBuilder {
         .setSmallIcon(R.drawable.ic_stat_default_notification)
         .setColor(ContextCompat.getColor(mContext, R.color.colorAccent))
         .setVibrate(VIBRATE_PATTERN)
-        .setSound(tone);
+        .setSound(tone)
+        .setLights(Color.YELLOW, 500, 500);
     return this;
   }
   
