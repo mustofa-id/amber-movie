@@ -68,7 +68,8 @@
       android:name=".provider.MovieFavoriteProvider"
       android:authorities="id.mustofa.app.amber.provider"
       android:exported="true"
-      android:permission="id.mustofa.app.amber.provider.READ_WRITE" />
+      android:readPermission="id.mustofa.app.amber.provider.READ_DATABASE"
+      android:writePermission="id.mustofa.app.amber.provider.WRITE_DATABASE" />
   </application>
 
 </manifest>

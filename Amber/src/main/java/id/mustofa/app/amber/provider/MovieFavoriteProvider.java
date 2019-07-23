@@ -21,11 +21,6 @@ public class MovieFavoriteProvider extends ContentProvider {
   
   public static final String AUTHORITY = "id.mustofa.app.amber.provider";
   
-  /*
-  public static final Uri URI_MOVIE_FAVORITE = Uri.parse(
-      "content://" + AUTHORITY + "/" + MovieFavorite.TABLE_NAME);
-  */
-  
   private static final String TABLE_NAME = "favorite_movie";
   private static final int MOVIE_FAVORITE_DIR = 1;
   private static final int MOVIE_FAVORITE_ITEM = 2;
@@ -45,37 +40,26 @@ public class MovieFavoriteProvider extends ContentProvider {
   @Override
   public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
                       @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-    final int code = MATCHER.match(uri);
-    if (code == MOVIE_FAVORITE_DIR || code == MOVIE_FAVORITE_ITEM) {
-      final Context context = getContext();
-      if (context == null) {
-        return null;
-      }
-      MovieLocalDao dao = AppDatabase.getInstance(context).movieLocalDao();
-      final Cursor cursor;
-      if (code == MOVIE_FAVORITE_DIR) {
-        cursor = dao.selectAllFavorites();
-      } else {
-        cursor = dao.selectFavoriteById(ContentUris.parseId(uri));
-      }
-      cursor.setNotificationUri(context.getContentResolver(), uri);
-      return cursor;
+  
+    final Context context = getContext();
+    if (context == null) {
+      return null;
+    }
+  
+    final int uriPath = MATCHER.match(uri);
+    final MovieLocalDao dao = AppDatabase.getInstance(context).movieLocalDao();
+  
+    Cursor cursor;
+    if (uriPath == MOVIE_FAVORITE_DIR) {
+      cursor = dao.selectAllFavorites();
+    } else if (uriPath == MOVIE_FAVORITE_ITEM) {
+      cursor = dao.selectFavoriteById(ContentUris.parseId(uri));
     } else {
       throw new IllegalArgumentException("Unknown URI: " + uri);
     }
-  }
   
-  @Nullable
-  @Override
-  public String getType(@NonNull Uri uri) {
-    switch (MATCHER.match(uri)) {
-      case MOVIE_FAVORITE_DIR:
-        return "vnd.android.cursor.dir/" + AUTHORITY + "." + TABLE_NAME;
-      case MOVIE_FAVORITE_ITEM:
-        return "vnd.android.cursor.item/" + AUTHORITY + "." + TABLE_NAME;
-      default:
-        throw new IllegalArgumentException("Unknown URI: " + uri);
-    }
+    cursor.setNotificationUri(context.getContentResolver(), uri);
+    return cursor;
   }
   
   @Nullable
@@ -108,5 +92,20 @@ public class MovieFavoriteProvider extends ContentProvider {
   public int update(@NonNull Uri uri, @Nullable ContentValues values,
                     @Nullable String selection, @Nullable String[] selectionArgs) {
     throw new IllegalAccessError("Update not allowed");
+  }
+  
+  @Nullable
+  @Override
+  public String getType(@NonNull Uri uri) {
+    final int uriPath = MATCHER.match(uri);
+    final String format;
+    if (uriPath == MOVIE_FAVORITE_DIR) {
+      format = "vnd.android.cursor.dir/%s.%s";
+    } else if (uriPath == MOVIE_FAVORITE_ITEM) {
+      format = "vnd.android.cursor.item/%s.%s";
+    } else {
+      throw new IllegalArgumentException("Unknown URI: " + uri);
+    }
+    return String.format(format, AUTHORITY, TABLE_NAME);
   }
 }
