@@ -24,4 +24,13 @@ public interface MovieRemoteDao {
   
   @GET("search/{type}?language=en-US&api_key=" + BuildConfig.MOVIEDB_API_KEY)
   Call<MovieWrapper> searchMovies(@Path("type") String type, @QueryMap Map<String, String> queryMap);
+  
+  @GET("trending/{type}/day?language=en-US&api_key=" + BuildConfig.MOVIEDB_API_KEY)
+  Call<MovieWrapper> getTrendingMovies(@Path("type") String type, @QueryMap Map<String, String> queryMap);
+  
+  @GET("{type}/popular?language=en-US&api_key=" + BuildConfig.MOVIEDB_API_KEY)
+  Call<MovieWrapper> getPopularMovies(@Path("type") String type, @QueryMap Map<String, String> queryMap);
+  
+  @GET("{type}/{id}/similar?language=en-US&api_key=" + BuildConfig.MOVIEDB_API_KEY)
+  Call<MovieWrapper> getSimilarMovies(@Path("type") String type, @Path("id") long id, @QueryMap Map<String, String> queryMap);
 }
