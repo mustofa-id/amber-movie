@@ -24,6 +24,7 @@ import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.base.BaseAppCompatActivity;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.movie.MovieFragment;
+import id.mustofa.app.amber.movieall.MovieAllFragment;
 import id.mustofa.app.amber.moviefavorite.MovieFavoriteFragment;
 import id.mustofa.app.amber.setting.SettingActivity;
 
@@ -108,6 +109,7 @@ public class MainActivity extends BaseAppCompatActivity
   
   private List<MainPagerItem> getMoviePagerItems() {
     return Arrays.asList(
+        new MainPagerItem(getString(R.string.title_tab_all), MovieAllFragment.newInstance()),
         new MainPagerItem(getString(R.string.title_tab_movie), MovieFragment.newInstance(MediaType.MOVIE)),
         new MainPagerItem(getString(R.string.title_tab_tv), MovieFragment.newInstance(MediaType.TV))
     );

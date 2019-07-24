@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/item_movie_all_height"
+  android:layout_margin="@dimen/component_margin_small"
+  android:orientation="vertical"
+  app:cardElevation="@dimen/component_padding_small">
+  
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/component_margin_small"
+      android:clickable="true"
+      android:focusable="true"
+      android:weightSum="10">
+      
+      <TextView
+        android:id="@+id/text_section_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        tools:text="@string/mock_title" />
+      
+      <Button
+        android:id="@+id/btn_section_more"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_weight="2"
+        android:text="@string/action_more" />
+    </LinearLayout>
+    
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/rv_section_movies"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" />
+  
+  </LinearLayout>
+  
+  <ProgressBar
+    android:id="@+id/pb_section_loading"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center" />
+  
+  <TextView
+    android:id="@+id/text_section_empty_message"
+    style="@style/TextAppearance.AppCompat.Medium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="@string/msg_no_movie" />
+
+</android.support.v7.widget.CardView>

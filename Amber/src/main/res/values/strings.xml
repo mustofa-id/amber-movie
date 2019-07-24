@@ -2,6 +2,7 @@
   <string name="app_name">Amber Movie</string>
   <string name="app_description">Discover New Movies &amp; TV Shows</string>
   
+  <string name="title_tab_all">All</string>
   <string name="title_tab_movie">Movie</string>
   <string name="title_tab_tv">TV Show</string>
   <string name="title_setting">Setting</string>
@@ -36,6 +37,7 @@
   <string name="action_favorite_added">Remove favorite</string>
   <string name="action_search_hint_movie">Search movie…</string>
   <string name="action_search_hint_tv">Search tv show…</string>
+  <string name="action_more">More</string>
   
   <string name="error_unknown">Something went wrong!</string>
   

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="@dimen/image_item_movie_width"
+  android:layout_height="@dimen/image_item_movie_height"
+  android:layout_marginStart="@dimen/component_margin_small"
+  android:layout_marginEnd="@dimen/component_margin_small"
+  android:layout_marginBottom="@dimen/component_margin_small"
+  android:clickable="true"
+  android:focusable="true"
+  android:foreground="?android:attr/selectableItemBackground">
+  
+  <ImageView
+    android:id="@+id/img_item_movie_all_poster"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/desc_poster_image"
+    android:scaleType="centerCrop"
+    tools:srcCompat="@drawable/img_mock_poster" />
+  
+  <TextView
+    android:id="@+id/text_item_movie_all_rating"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorTransparent"
+    android:drawableStart="@drawable/ic_star_light_18dp"
+    android:padding="@dimen/component_margin_tiny"
+    android:textColor="@android:color/white"
+    tools:text="@string/mock_average_rate" />
+  
+  <TextView
+    android:id="@+id/text_item_movie_all_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|bottom"
+    android:background="@drawable/bg_poster_title"
+    android:maxLines="1"
+    android:padding="@dimen/component_margin_small"
+    android:textAlignment="center"
+    android:textColor="@android:color/white"
+    tools:text="@string/mock_title" />
+</FrameLayout>

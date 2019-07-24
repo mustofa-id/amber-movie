@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.movie.MovieViewModel;
+import id.mustofa.app.amber.movieall.MovieAllViewModel;
 import id.mustofa.app.amber.moviedetail.MovieDetailViewModel;
 import id.mustofa.app.amber.moviefavorite.MovieFavoriteViewModel;
 
@@ -45,6 +46,8 @@ public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory
       return (T) new MovieDetailViewModel(mMovieRepository);
     } else if (modelClass.isAssignableFrom(MovieFavoriteViewModel.class)) {
       return (T) new MovieFavoriteViewModel(mMovieRepository);
+    } else if (modelClass.isAssignableFrom(MovieAllViewModel.class)) {
+      return (T) new MovieAllViewModel(mMovieRepository);
     }
     throw new IllegalArgumentException("Unknown ViewModel: " + modelClass.getName());
   }

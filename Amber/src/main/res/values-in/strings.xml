@@ -3,6 +3,7 @@
   <string name="app_name">Amber Film</string>
   <string name="app_description">Temukan Film &amp; Acara TV Baru</string>
   
+  <string name="title_tab_all">Semua</string>
   <string name="title_tab_movie">Film</string>
   <string name="title_tab_tv">Acara TV</string>
   <string name="title_setting">Pengaturan</string>
@@ -37,6 +38,7 @@
   <string name="action_favorite_added">Hapus favorite</string>
   <string name="action_search_hint_movie">Cari film…</string>
   <string name="action_search_hint_tv">Cari acara tv…</string>
+  <string name="action_more">Lebih</string>
   
   <string name="error_unknown">Terjadi kesalahan!</string>
   
