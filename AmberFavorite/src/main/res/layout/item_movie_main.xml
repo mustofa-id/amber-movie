@@ -19,7 +19,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/colorTransparent"
-    android:drawableStart="@drawable/ic_star_light_24dp"
+    android:drawableStart="@drawable/ic_star_light_18dp"
     android:padding="@dimen/view_distance_tiny"
     android:textColor="@android:color/white" />
   
