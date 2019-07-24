@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.moviedetail;
+package id.mustofa.app.amber.movie.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;

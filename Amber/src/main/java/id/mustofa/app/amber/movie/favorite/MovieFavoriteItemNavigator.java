@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.moviefavorite;
+package id.mustofa.app.amber.movie.favorite;
 
 import id.mustofa.app.amber.data.model.MovieFavorite;
 

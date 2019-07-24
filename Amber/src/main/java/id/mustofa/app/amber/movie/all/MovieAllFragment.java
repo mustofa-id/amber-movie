@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.movieall;
+package id.mustofa.app.amber.movie.all;
 
 
 import android.arch.lifecycle.ViewModelProviders;
@@ -19,7 +19,7 @@ import java.util.List;
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
-import id.mustofa.app.amber.moviedetail.MovieDetailActivity;
+import id.mustofa.app.amber.movie.detail.MovieDetailActivity;
 import id.mustofa.app.amber.util.ViewModelFactory;
 
 public class MovieAllFragment extends Fragment implements MovieAllItemNavigator {

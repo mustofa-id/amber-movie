@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.movieall;
+package id.mustofa.app.amber.movie.all;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;

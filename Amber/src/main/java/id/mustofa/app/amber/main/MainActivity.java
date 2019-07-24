@@ -24,8 +24,8 @@ import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.base.BaseAppCompatActivity;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.movie.MovieFragment;
-import id.mustofa.app.amber.movieall.MovieAllFragment;
-import id.mustofa.app.amber.moviefavorite.MovieFavoriteFragment;
+import id.mustofa.app.amber.movie.all.MovieAllFragment;
+import id.mustofa.app.amber.movie.favorite.MovieFavoriteFragment;
 import id.mustofa.app.amber.setting.SettingActivity;
 
 /**

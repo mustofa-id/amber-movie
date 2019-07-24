@@ -33,7 +33,7 @@
       android:name=".main.MainActivity"
       android:theme="@style/AppTheme.NoActionBar" />
     <activity
-      android:name=".moviedetail.MovieDetailActivity"
+      android:name=".movie.detail.MovieDetailActivity"
       android:theme="@style/AppTheme.MaterialNoActionBar" />
     <activity
       android:name=".setting.SettingActivity"
@@ -47,7 +47,6 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
-    
     <receiver
       android:name=".widget.MovieFavoriteWidget"
       android:label="@string/title_widget_movie_favorite_title">

@@ -7,9 +7,9 @@ import android.support.annotation.NonNull;
 
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.movie.MovieViewModel;
-import id.mustofa.app.amber.movieall.MovieAllViewModel;
-import id.mustofa.app.amber.moviedetail.MovieDetailViewModel;
-import id.mustofa.app.amber.moviefavorite.MovieFavoriteViewModel;
+import id.mustofa.app.amber.movie.all.MovieAllViewModel;
+import id.mustofa.app.amber.movie.detail.MovieDetailViewModel;
+import id.mustofa.app.amber.movie.favorite.MovieFavoriteViewModel;
 
 /**
  * @author Habib Mustofa

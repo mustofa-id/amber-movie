@@ -19,7 +19,7 @@ import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
-import id.mustofa.app.amber.moviedetail.MovieDetailActivity;
+import id.mustofa.app.amber.movie.detail.MovieDetailActivity;
 import id.mustofa.app.amber.splash.SplashActivity;
 import id.mustofa.app.amber.util.DateUtil;
 import id.mustofa.app.amber.util.Injection;

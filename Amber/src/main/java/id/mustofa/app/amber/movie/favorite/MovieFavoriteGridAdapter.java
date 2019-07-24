@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.moviefavorite;
+package id.mustofa.app.amber.movie.favorite;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;

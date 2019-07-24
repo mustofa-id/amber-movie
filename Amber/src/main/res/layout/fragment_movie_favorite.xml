@@ -4,7 +4,7 @@
   android:id="@+id/sr_fragment_movie_favorite"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".moviefavorite.MovieFavoriteFragment">
+  tools:context=".movie.favorite.MovieFavoriteFragment">
   
   <RelativeLayout
     android:layout_width="match_parent"

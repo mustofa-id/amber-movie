@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.movieall;
+package id.mustofa.app.amber.movie.all;
 
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;

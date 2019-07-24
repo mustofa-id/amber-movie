@@ -12,7 +12,7 @@ import android.widget.RemoteViews;
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
-import id.mustofa.app.amber.moviedetail.MovieDetailActivity;
+import id.mustofa.app.amber.movie.detail.MovieDetailActivity;
 
 /**
  * @author Habib Mustofa

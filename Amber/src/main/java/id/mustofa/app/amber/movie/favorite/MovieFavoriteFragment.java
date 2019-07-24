@@ -1,4 +1,4 @@
-package id.mustofa.app.amber.moviefavorite;
+package id.mustofa.app.amber.movie.favorite;
 
 
 import android.arch.lifecycle.LifecycleOwner;
@@ -21,7 +21,7 @@ import android.widget.Toast;
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.MovieFavorite;
-import id.mustofa.app.amber.moviedetail.MovieDetailActivity;
+import id.mustofa.app.amber.movie.detail.MovieDetailActivity;
 import id.mustofa.app.amber.util.ViewModelFactory;
 
 /**
