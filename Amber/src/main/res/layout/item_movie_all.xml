@@ -22,7 +22,7 @@
     android:id="@+id/text_item_movie_all_rating"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorTransparent"
+    android:background="@color/colorTransparentGrey"
     android:drawableStart="@drawable/ic_star_light_18dp"
     android:padding="@dimen/component_margin_tiny"
     android:textColor="@android:color/white"

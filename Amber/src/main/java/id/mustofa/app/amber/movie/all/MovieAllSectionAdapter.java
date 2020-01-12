@@ -79,20 +79,30 @@ class MovieAllSectionAdapter extends RecyclerView.Adapter<MovieAllSectionAdapter
     }
     
     private void setItem(MovieAllSectionItem item) {
+      title.setText(item.getTitle());
+      more.setOnClickListener(v -> mItemNavigator.openSectionDetail(item));
+      
       setLoading(true);
       showEmptyMessage(false);
-      title.setText(item.getTitle());
-      final MovieAllListAdapter adapter = item.getAdapter();
-      adapter.setItemNavigator(mItemNavigator);
-      recyclerView.setAdapter(adapter);
-      more.setOnClickListener(v -> mItemNavigator.openSectionDetail(item));
-      adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-        @Override
-        public void onChanged() {
-          super.onChanged();
-          setLoading(false);
-          showEmptyMessage(adapter.isEmpty());
-        }
+  
+      final MovieAllGridAdapter gridAdapter = item.getAdapter();
+      gridAdapter.setItemNavigator(mItemNavigator);
+      recyclerView.setAdapter(gridAdapter);
+  
+      //  final RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
+      //    @Override
+      //    public void onChanged() {
+      //      Log.e(getClass().getName(), "onItemRangeChanged: ");
+      //      setLoading(false);
+      //      showEmptyMessage(gridAdapter.isEmpty());
+      //      super.onChanged();
+      //    }
+      //  };
+      //  gridAdapter.registerAdapterDataObserver(observer);
+  
+      gridAdapter.setBindListener((empty) -> {
+        setLoading(false);
+        showEmptyMessage(empty);
       });
     }
     

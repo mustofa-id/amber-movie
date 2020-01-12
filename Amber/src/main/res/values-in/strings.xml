@@ -19,6 +19,12 @@
   <string name="title_movie_favorite">Favorite</string>
   <string name="title_others">Lainnya</string>
   <string name="title_widget_movie_favorite_title">Film Favorite Ku</string>
+  <string name="title_trending_movie">Film yang sedang tren</string>
+  <string name="title_trending_tv">Acara TV yang sedang tren</string>
+  <string name="title_popular_movie">Film populer</string>
+  <string name="title_popular_tv">Acara TV populer</string>
+  <string name="title_release_today_movie">Rilis hari ini</string>
+  <string name="title_movie_search">Search</string>
   
   <string name="desc_poster_image">Gambar poster</string>
   <string name="desc_backdrop_image">Gambar backdrop</string>
@@ -38,7 +44,11 @@
   <string name="action_favorite_added">Hapus favorite</string>
   <string name="action_search_hint_movie">Cari film…</string>
   <string name="action_search_hint_tv">Cari acara tv…</string>
+  <string name="action_search_hint_favorite">Cari di favorite…</string>
   <string name="action_more">Lebih</string>
+  <string name="action_filter_movie">Pencarian Film</string>
+  <string name="action_filter_tv">Pencarian Acara TV</string>
+  <string name="action_filter_favorite">Search in favorite</string>
   
   <string name="error_unknown">Terjadi kesalahan!</string>
   
@@ -59,6 +69,8 @@
   <plurals name="msg_release_today_notification_text">
     <item quantity="other">%d film baru</item>
   </plurals>
+  <string name="msg_failed_fetch_some_movies">Gagal megambil beberapa data movie!</string>
+  <string name="msg_similar_movie_err">Gagal menampilkan movie serupa</string>
   
   <string name="text_heading_overview">Kilasan Singkat</string>
   <string name="text_heading_genres">Genre</string>
@@ -67,4 +79,5 @@
   <string name="text_subheading_original_language">Bahasa Asal</string>
   <string name="text_subheading_popularity">Popularitas</string>
   <string name="text_subheading_original_title">Judul Asli</string>
+  <string name="text_heading_similar">Movie serupa</string>
 </resources>

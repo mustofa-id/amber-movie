@@ -9,7 +9,6 @@ import java.util.List;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-@SuppressWarnings("unused") // May used in future like pagination or infinite scroll
 public class MovieWrapper {
   
   @Expose

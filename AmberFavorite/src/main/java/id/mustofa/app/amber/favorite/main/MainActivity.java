@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Iterator;
@@ -26,11 +27,16 @@ public class MainActivity extends AppCompatActivity
   private MainGridAdapter mAdapter;
   private MainFilterType mType = MainFilterType.ALL;
   private TextView mTextEmpty;
+  private ProgressBar mLoading;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+  
+    mTextEmpty = findViewById(R.id.text_main_empty_data);
+    mLoading = findViewById(R.id.pb_main_loading);
+    
     setupRecyclerView();
   
     if (savedInstanceState != null) {
@@ -65,11 +71,13 @@ public class MainActivity extends AppCompatActivity
   }
   
   private void getAllMovies() {
-    new DataAccessAsync.GetMovies(getContentResolver(), this).execute();
+    setLoadingEnabled(true);
+    new DataAccessAsync
+        .GetMovies(getContentResolver(), this)
+        .execute();
   }
   
   private void setupRecyclerView() {
-    mTextEmpty = findViewById(R.id.text_main_empty_data);
     int spanCount = getResources().getInteger(R.integer.grid_span_count);
     RecyclerView recyclerView = findViewById(R.id.rv_main_movies);
     recyclerView.setHasFixedSize(true);
@@ -83,6 +91,7 @@ public class MainActivity extends AppCompatActivity
     filterMovies(movies);
     mAdapter.populateData(movies);
     mTextEmpty.setVisibility(movies.isEmpty() ? View.VISIBLE : View.GONE);
+    setLoadingEnabled(false);
   }
   
   @Override
@@ -118,6 +127,10 @@ public class MainActivity extends AppCompatActivity
         setTitle(String.format("%s (%s)", defaultTitle, getString(R.string.action_tv_show)));
         break;
     }
+  }
+  
+  private void setLoadingEnabled(boolean enable) {
+    mLoading.setVisibility(enable ? View.VISIBLE : View.GONE);
   }
   
   @Override

@@ -38,6 +38,9 @@
     <activity
       android:name=".setting.SettingActivity"
       android:label="@string/title_setting" />
+    <activity
+      android:name=".movie.search.MovieSearchActivity"
+      android:theme="@style/AppTheme.NoActionBar.FadeTransition" />
     
     <!-- Receivers -->
     <receiver
@@ -53,18 +56,17 @@
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
       </intent-filter>
+  
       <meta-data
         android:name="android.appwidget.provider"
         android:resource="@xml/movie_favorite_widget_info" />
     </receiver>
-    
-    <!--Services-->
+  
+    <!-- Services -->
     <service
       android:name=".widget.MovieFavoriteWidgetService"
       android:exported="false"
-      android:permission="android.permission.BIND_REMOTEVIEWS" />
-    
-    <!--Providers-->
+      android:permission="android.permission.BIND_REMOTEVIEWS" /> <!-- Providers -->
     <provider
       android:name=".provider.MovieFavoriteProvider"
       android:authorities="id.mustofa.app.amber.provider"

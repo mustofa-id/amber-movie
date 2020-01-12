@@ -7,12 +7,16 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.data.model.Genre;
 import id.mustofa.app.amber.data.model.MediaType;
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
+
+import static id.mustofa.app.amber.util.QueryHelper.Params;
+import static id.mustofa.app.amber.util.QueryHelper.createQuery;
 
 /**
  * @author Habib Mustofa
@@ -21,9 +25,11 @@ import id.mustofa.app.amber.data.model.MovieFavorite;
 public class MovieDetailViewModel extends ViewModel {
   
   private final MutableLiveData<List<Genre>> mGenres = new MutableLiveData<>();
+  private final MutableLiveData<List<Movie>> mSimilarMovies = new MutableLiveData<>();
   private final MutableLiveData<Integer> mGenresMessageResId = new MutableLiveData<>();
   private final MutableLiveData<Boolean> mIsFavorite = new MutableLiveData<>();
   private final MutableLiveData<Integer> mIsFavoriteMessageResId = new MutableLiveData<>();
+  private final MutableLiveData<Integer> mSimilarMovieMessageResId = new MutableLiveData<>();
   
   private final MovieRepository mMovieRepository;
   
@@ -38,7 +44,7 @@ public class MovieDetailViewModel extends ViewModel {
     mMediaType = type;
   }
   
-  void addToFavorite(MovieFavorite movie) {
+  void addToFavorite(Movie movie) {
     movie.setType(mMediaType.getValue());
     mMovieRepository.addToFavorite(movie, (id, error) -> {
       if (error != null || id == -1) {
@@ -50,7 +56,7 @@ public class MovieDetailViewModel extends ViewModel {
     });
   }
   
-  void removeFromFavorite(MovieFavorite movie) {
+  void removeFromFavorite(Movie movie) {
     mMovieRepository.removeFromFavorite(movie, (row, error) -> {
       if (error != null || row == -1) {
         mIsFavoriteMessageResId.postValue(R.string.msg_remove_favorite_fail);
@@ -91,8 +97,25 @@ public class MovieDetailViewModel extends ViewModel {
     });
   }
   
+  void loadSimilar(long movieId, boolean includeAdult) {
+    Map<String, String> params = createQuery(
+        Params.INCLUDE_ADULT, String.valueOf(includeAdult)
+    );
+    mMovieRepository.findMoviesSimilar(mMediaType, movieId, params, (result, error) -> {
+      if (error != null) {
+        mSimilarMovieMessageResId.postValue(R.string.msg_similar_movie_err);
+      } else {
+        mSimilarMovies.postValue(result);
+      }
+    });
+  }
+  
   LiveData<List<Genre>> getGenres() {
     return mGenres;
+  }
+  
+  LiveData<List<Movie>> getSimilarMovie() {
+    return mSimilarMovies;
   }
   
   LiveData<Integer> getGenresMessageResId() {
@@ -105,5 +128,9 @@ public class MovieDetailViewModel extends ViewModel {
   
   LiveData<Integer> getFavoriteMessageResId() {
     return mIsFavoriteMessageResId;
+  }
+  
+  LiveData<Integer> getSimilarMovieMessageResId() {
+    return mSimilarMovieMessageResId;
   }
 }

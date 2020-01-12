@@ -18,6 +18,12 @@
   <string name="title_movie_favorite">Favorite</string>
   <string name="title_others">Others</string>
   <string name="title_widget_movie_favorite_title">My Favorite Movies</string>
+  <string name="title_trending_movie">Trending in movie</string>
+  <string name="title_trending_tv">Trending in tv</string>
+  <string name="title_popular_movie">Popular in movie</string>
+  <string name="title_popular_tv">Popular in tv</string>
+  <string name="title_release_today_movie">Release today</string>
+  <string name="title_movie_search">Search</string>
   
   <string name="desc_poster_image">Poster image</string>
   <string name="desc_backdrop_image">Backdrop image</string>
@@ -37,7 +43,11 @@
   <string name="action_favorite_added">Remove favorite</string>
   <string name="action_search_hint_movie">Search movie…</string>
   <string name="action_search_hint_tv">Search tv show…</string>
+  <string name="action_search_hint_favorite">Search my favorite…</string>
   <string name="action_more">More</string>
+  <string name="action_filter_movie">Search for Movie</string>
+  <string name="action_filter_tv">Search for TV Show</string>
+  <string name="action_filter_favorite">Search in favorite</string>
   
   <string name="error_unknown">Something went wrong!</string>
   
@@ -59,6 +69,8 @@
     <item quantity="one">%d new movie</item>
     <item quantity="other">%d new movies</item>
   </plurals>
+  <string name="msg_failed_fetch_some_movies">Failed to fetch some movie data!</string>
+  <string name="msg_similar_movie_err">Failed to load similar movies</string>
   
   <string name="text_heading_overview">Overview</string>
   <string name="text_heading_genres">Genres</string>
@@ -67,6 +79,7 @@
   <string name="text_subheading_vote_count">Vote Count</string>
   <string name="text_subheading_original_language">Original Language</string>
   <string name="text_subheading_original_title">Original Title</string>
+  <string name="text_heading_similar">Similar movies</string>
   
   <string name="key_prefs_lang" translatable="false">prefs_lang</string>
   <string name="key_prefs_daily_reminder" translatable="false">prefs_daily_reminder</string>

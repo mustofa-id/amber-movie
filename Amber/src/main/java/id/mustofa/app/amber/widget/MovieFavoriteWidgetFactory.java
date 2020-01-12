@@ -12,7 +12,7 @@ import java.util.List;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.model.MediaType;
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
 import id.mustofa.app.amber.data.source.local.AppDatabase;
 import id.mustofa.app.amber.data.source.local.MovieLocalDao;
 import id.mustofa.app.amber.util.ImageLoader;
@@ -40,9 +40,9 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
   @Override
   public void onDataSetChanged() {
     final String type = MediaType.MOVIE.getValue();
-    final List<MovieFavorite> favorites = movieLocalDao.findFavoriteByType(type);
+    final List<Movie> favorites = movieLocalDao.findFavoriteByType(type);
     mData.clear();
-    for (MovieFavorite movie : favorites) {
+    for (Movie movie : favorites) {
       Bitmap bitmap = ImageLoader.getBitmap(mContext, movie.getPosterPath());
       mData.add(new DataHolder(movie, bitmap));
     }
@@ -86,7 +86,7 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
   @Override
   public long getItemId(int position) {
     if (mData.isEmpty()) return position;
-    MovieFavorite favorite = mData.get(position).movieFavorite;
+    Movie favorite = mData.get(position).movieFavorite;
     return favorite.getId();
   }
   
@@ -104,11 +104,11 @@ public class MovieFavoriteWidgetFactory implements RemoteViewsService.RemoteView
   // Helper class for hold bitmap that fetched synchronously
   // on dataSetChanged will make getViewAt load fast
   private class DataHolder {
-    
-    private MovieFavorite movieFavorite;
+  
+    private Movie movieFavorite;
     private Bitmap poster;
-    
-    private DataHolder(MovieFavorite movieFavorite, Bitmap poster) {
+  
+    private DataHolder(Movie movieFavorite, Bitmap poster) {
       this.movieFavorite = movieFavorite;
       this.poster = poster;
     }

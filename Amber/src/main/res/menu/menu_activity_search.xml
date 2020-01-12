@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context="id.mustofa.app.amber.main.MainActivity">
+  
+  <item
+    android:id="@+id/act_search_filter_movie"
+    android:title="@string/action_filter_movie"
+    app:showAsAction="never" />
+  
+  <item
+    android:id="@+id/act_search_filter_tv"
+    android:title="@string/action_filter_tv"
+    app:showAsAction="never" />
+  
+  <item
+    android:id="@+id/act_search_filter_favorite"
+    android:title="@string/action_filter_favorite"
+    app:showAsAction="never" />
+</menu>

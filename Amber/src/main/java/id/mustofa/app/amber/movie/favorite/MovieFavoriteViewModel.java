@@ -10,7 +10,7 @@ import java.util.List;
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.MovieRepository;
 import id.mustofa.app.amber.data.model.MediaType;
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
 
 /**
  * @author Habib Mustofa
@@ -18,7 +18,7 @@ import id.mustofa.app.amber.data.model.MovieFavorite;
  */
 public class MovieFavoriteViewModel extends ViewModel {
   
-  private final MutableLiveData<List<MovieFavorite>> mMovieFavorites = new MutableLiveData<>();
+  private final MutableLiveData<List<Movie>> mMovieFavorites = new MutableLiveData<>();
   private final MutableLiveData<Boolean> mLoading = new MutableLiveData<>();
   private final MutableLiveData<Integer> mMessageResId = new MutableLiveData<>();
   
@@ -61,7 +61,7 @@ public class MovieFavoriteViewModel extends ViewModel {
     });
   }
   
-  LiveData<List<MovieFavorite>> getMovieFavorites() {
+  LiveData<List<Movie>> getMovieFavorites() {
     return mMovieFavorites;
   }
   

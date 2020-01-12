@@ -13,12 +13,12 @@ class MovieAllSectionItem {
   
   private final String title;
   private final MediaType type;
-  private final MovieAllListAdapter adapter;
+  private final MovieAllGridAdapter adapter;
   
   MovieAllSectionItem(String title, MediaType type) {
     this.title = title;
     this.type = type;
-    this.adapter = new MovieAllListAdapter(type);
+    this.adapter = new MovieAllGridAdapter(type);
   }
   
   String getTitle() {
@@ -33,7 +33,7 @@ class MovieAllSectionItem {
     adapter.populateMovies(movies);
   }
   
-  MovieAllListAdapter getAdapter() {
+  MovieAllGridAdapter getAdapter() {
     return adapter;
   }
 }

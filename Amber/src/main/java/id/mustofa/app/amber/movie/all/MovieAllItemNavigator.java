@@ -11,5 +11,5 @@ public interface MovieAllItemNavigator {
   
   void openMovieDetail(Movie movie, MediaType type);
   
-  void openSectionDetail(MovieAllSectionItem item);
+  default void openSectionDetail(MovieAllSectionItem item) {}
 }

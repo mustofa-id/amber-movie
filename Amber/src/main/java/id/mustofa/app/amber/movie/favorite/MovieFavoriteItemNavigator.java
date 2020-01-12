@@ -1,6 +1,6 @@
 package id.mustofa.app.amber.movie.favorite;
 
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
 
 /**
  * @author Habib Mustofa
@@ -8,5 +8,5 @@ import id.mustofa.app.amber.data.model.MovieFavorite;
  */
 public interface MovieFavoriteItemNavigator {
   
-  void openMovieFavoriteDetail(MovieFavorite movieFavorite);
+  void openMovieFavoriteDetail(Movie movieFavorite);
 }

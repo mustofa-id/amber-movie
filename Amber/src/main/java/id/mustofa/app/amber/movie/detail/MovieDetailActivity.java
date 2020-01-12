@@ -1,10 +1,15 @@
 package id.mustofa.app.amber.movie.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +27,8 @@ import id.mustofa.app.amber.base.BaseAppCompatActivity;
 import id.mustofa.app.amber.data.model.Genre;
 import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.data.model.Movie;
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.movie.all.MovieAllGridAdapter;
+import id.mustofa.app.amber.movie.all.MovieAllItemNavigator;
 import id.mustofa.app.amber.util.DateUtil;
 import id.mustofa.app.amber.util.ImageLoader;
 import id.mustofa.app.amber.util.ViewModelFactory;
@@ -32,12 +38,13 @@ import id.mustofa.app.amber.widget.MovieFavoriteWidget;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-public class MovieDetailActivity extends BaseAppCompatActivity {
-  // TODO: Add list reviewers, similar movies, etc.
+public class MovieDetailActivity extends BaseAppCompatActivity implements MovieAllItemNavigator {
+  
   public static final String EXTRA_MOVIE_ITEM = "MOVIE_ITEM__";
   public static final String EXTRA_MOVIE_TYPE = "MOVIE_TYPE__";
   
   private MovieDetailViewModel mMovieDetailViewModel;
+  private SharedPreferences mPrefs;
   
   private FloatingActionButton mFabPlayTrailer;
   private ImageView mImagePoster, mImageBackdrop;
@@ -46,20 +53,33 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
   private TextView mTextGenreMessage;
   private RatingBar mRateRating;
   private ChipGroup mChipGroupGenre;
+  private MovieAllGridAdapter mGridAdapter;
   private MenuItem mMenuFavorite, mMenuRemoveFavorite;
   
   private Movie mMovie;
+  private MediaType mMediaType;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_movie_detail);
+    mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+  
+    getExtras();
     setupToolbar();
     setupViewModel();
     bindViews();
     populateMovieToViews();
+    setupRecyclerView();
     subscribeViewModelChange();
     mFabPlayTrailer.setOnClickListener(this::onPlayTrailer);
+  }
+  
+  @Override
+  protected void onResume() {
+    super.onResume();
+    boolean includeAdult = !mPrefs.getBoolean(getString(R.string.key_prefs_restricted_mode), false);
+    mMovieDetailViewModel.loadSimilar(mMovie.getId(), includeAdult);
   }
   
   @Override
@@ -73,15 +93,14 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
   
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    final MovieFavorite movie = new MovieFavorite(mMovie);
     int id = item.getItemId();
     if (id == android.R.id.home) {
       onBackPressed();
     } else if (id == mMenuFavorite.getItemId()) {
-      mMovieDetailViewModel.addToFavorite(movie);
+      mMovieDetailViewModel.addToFavorite(mMovie);
       updateMovieFavoriteWidget();
     } else if (id == mMenuRemoveFavorite.getItemId()) {
-      mMovieDetailViewModel.removeFromFavorite(movie);
+      mMovieDetailViewModel.removeFromFavorite(mMovie);
       updateMovieFavoriteWidget();
     }
     return super.onOptionsItemSelected(item);
@@ -92,11 +111,23 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
     mMovieDetailViewModel = ViewModelProviders.of(this, factory).get(MovieDetailViewModel.class);
   }
   
+  private void setupRecyclerView() {
+    mGridAdapter = new MovieAllGridAdapter(mMediaType);
+    mGridAdapter.setItemNavigator(this);
+    RecyclerView recyclerView = findViewById(R.id.rv_detail_similar_movies);
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setLayoutManager(new LinearLayoutManager(
+        this, LinearLayoutManager.HORIZONTAL, false));
+    recyclerView.setAdapter(mGridAdapter);
+  }
+  
   private void subscribeViewModelChange() {
     mMovieDetailViewModel.getGenres().observe(this, this::onGenresLoaded);
     mMovieDetailViewModel.getGenresMessageResId().observe(this, this::onGenresHasMessage);
     mMovieDetailViewModel.getIsFavorite().observe(this, this::onIsFavorite);
     mMovieDetailViewModel.getFavoriteMessageResId().observe(this, this::onFavoriteHasMessage);
+    mMovieDetailViewModel.getSimilarMovie().observe(this, mGridAdapter::populateMovies);
+    mMovieDetailViewModel.getSimilarMovieMessageResId().observe(this, this::onSimilarMovieHasMessage);
   }
   
   private void setupToolbar() {
@@ -121,14 +152,17 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
     mChipGroupGenre = findViewById(R.id.cg_movie_detail_chips);
   }
   
-  private void populateMovieToViews() {
+  private void getExtras() {
     mMovie = getIntent().getParcelableExtra(EXTRA_MOVIE_ITEM);
-    MediaType mediaType = (MediaType) getIntent().getSerializableExtra(EXTRA_MOVIE_TYPE);
-    if (mMovie == null || mediaType == null) {
+    mMediaType = (MediaType) getIntent().getSerializableExtra(EXTRA_MOVIE_TYPE);
+  }
+  
+  private void populateMovieToViews() {
+    if (mMovie == null || mMediaType == null) {
       Toast.makeText(this, R.string.error_unknown, Toast.LENGTH_SHORT).show();
       return;
     }
-    mMovieDetailViewModel.setMediaType(mediaType);
+    mMovieDetailViewModel.setMediaType(mMediaType);
     mMovieDetailViewModel.setGenreIds(mMovie.getGenreIds());
     ImageLoader.load(this, mMovie.getPosterPath(), mImagePoster);
     ImageLoader.load(this, mMovie.getBackdropPath(), mImageBackdrop);
@@ -170,8 +204,20 @@ public class MovieDetailActivity extends BaseAppCompatActivity {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
   }
   
+  private void onSimilarMovieHasMessage(int resId) {
+    Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
+  }
+  
   @SuppressWarnings("unused")
   private void onPlayTrailer(View view) {
     Toast.makeText(this, R.string.msg_playing_trailer, Toast.LENGTH_SHORT).show();
+  }
+  
+  @Override
+  public void openMovieDetail(Movie movie, MediaType type) {
+    Intent movieDetailIntent = new Intent(this, MovieDetailActivity.class);
+    movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ITEM, movie);
+    movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_TYPE, type);
+    startActivity(movieDetailIntent);
   }
 }

@@ -52,29 +52,6 @@ public class MovieViewModel extends ViewModel {
     loadMovies(mCurrentMediaType, true);
   }
   
-  void searchMovies(String query) {
-    Map<String, String> queryParams = createQuery(
-        Params.QUERY, query
-    );
-    mMovies.setValue(new ArrayList<>());
-    mMessageResId.postValue(0);
-    mLoading.postValue(true);
-    mMovieRepository.findMoviesByQuery(mCurrentMediaType, queryParams, (movieList, error) -> {
-      if (error != null) {
-        if (mMovies.getValue() == null || mMovies.getValue().isEmpty()) {
-          mMessageResId.postValue(R.string.msg_failed_fetch_movies);
-        }
-      } else {
-        if (movieList.isEmpty()) {
-          mMessageResId.postValue(R.string.msg_no_movie);
-        } else {
-          mMovies.postValue(movieList);
-        }
-      }
-      mLoading.postValue(false);
-    });
-  }
-  
   private void loadMovies(MediaType type, boolean force) {
     Map<String, String> queryParams = createQuery(
         Params.INCLUDE_ADULT, mIncludeAdult,

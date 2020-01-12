@@ -114,8 +114,6 @@ public class NotificationReceiver extends BroadcastReceiver {
   
         final String contentText = context.getResources()
             .getQuantityString(R.plurals.msg_release_today_notification_text, maxNotify, maxNotify);
-  
-        // TODO: Should have own screen for Release today also for trending
         PendingIntent pendingIntent = getMainPendingIntent(context, idNotify);
         style.setBigContentTitle(contentText);
   

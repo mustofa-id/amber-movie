@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.mustofa.app.amber.R;
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
 import id.mustofa.app.amber.util.ImageLoader;
 
 /**
@@ -23,7 +23,7 @@ import id.mustofa.app.amber.util.ImageLoader;
  */
 public class MovieFavoriteGridAdapter extends RecyclerView.Adapter<MovieFavoriteGridAdapter.MovieFavoriteViewHolder> {
   
-  private final List<MovieFavorite> mListMovieFavorite = new ArrayList<>();
+  private final List<Movie> mListMovieFavorite = new ArrayList<>();
   private MovieFavoriteItemNavigator mMovieFavoriteItemNavigator;
   
   MovieFavoriteGridAdapter(@NonNull LifecycleOwner lifecycleOwner,
@@ -31,7 +31,7 @@ public class MovieFavoriteGridAdapter extends RecyclerView.Adapter<MovieFavorite
     viewModel.getMovieFavorites().observe(lifecycleOwner, this::populateMovieFavorite);
   }
   
-  private void populateMovieFavorite(List<MovieFavorite> movieFavorites) {
+  private void populateMovieFavorite(List<Movie> movieFavorites) {
     mListMovieFavorite.clear();
     mListMovieFavorite.addAll(movieFavorites);
     notifyDataSetChanged();
@@ -75,8 +75,8 @@ public class MovieFavoriteGridAdapter extends RecyclerView.Adapter<MovieFavorite
       title = itemView.findViewById(R.id.text_item_movie_favorite_title);
       rating = itemView.findViewById(R.id.rate_item_movie_favorite_rating);
     }
-    
-    private void setMovieFavorite(MovieFavorite movie) {
+  
+    private void setMovieFavorite(Movie movie) {
       ImageLoader.load(itemView.getContext(), movie.getPosterPath(), poster);
       title.setText(movie.getTitle());
       rating.setRating(movie.getVoteAverage() / 2);

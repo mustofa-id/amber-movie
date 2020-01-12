@@ -10,6 +10,7 @@ import id.mustofa.app.amber.movie.MovieViewModel;
 import id.mustofa.app.amber.movie.all.MovieAllViewModel;
 import id.mustofa.app.amber.movie.detail.MovieDetailViewModel;
 import id.mustofa.app.amber.movie.favorite.MovieFavoriteViewModel;
+import id.mustofa.app.amber.movie.search.MovieSearchViewModel;
 
 /**
  * @author Habib Mustofa
@@ -48,6 +49,8 @@ public final class ViewModelFactory extends ViewModelProvider.NewInstanceFactory
       return (T) new MovieFavoriteViewModel(mMovieRepository);
     } else if (modelClass.isAssignableFrom(MovieAllViewModel.class)) {
       return (T) new MovieAllViewModel(mMovieRepository);
+    } else if (modelClass.isAssignableFrom(MovieSearchViewModel.class)) {
+      return (T) new MovieSearchViewModel(mMovieRepository);
     }
     throw new IllegalArgumentException("Unknown ViewModel: " + modelClass.getName());
   }

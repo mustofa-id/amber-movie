@@ -22,37 +22,38 @@ import id.mustofa.app.amber.util.ImageLoader;
  * @author Habib Mustofa
  * Indonesia on 06/07/19.
  */
-class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
-  // TODO: Infinite scroll please
+public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
+  
   private final List<Movie> mListMovie = new ArrayList<>();
   private MovieItemNavigator mMovieItemNavigator;
   
+  public MovieListAdapter() {}
+  
   MovieListAdapter(@NonNull LifecycleOwner lifecycleOwner, @NonNull MovieViewModel movieViewModel) {
-    movieViewModel.getMovies().observe(lifecycleOwner, this::populateMovie);
+    movieViewModel.getMovies().observe(lifecycleOwner, this::populateMovies);
   }
   
-  private void populateMovie(List<Movie> movies) {
+  public void populateMovies(List<Movie> movies) {
     mListMovie.clear();
     mListMovie.addAll(movies);
     notifyDataSetChanged();
   }
   
-  void setMovieItemNavigator(MovieItemNavigator movieItemNavigator) {
+  public void setMovieItemNavigator(MovieItemNavigator movieItemNavigator) {
     this.mMovieItemNavigator = movieItemNavigator;
   }
   
   @NonNull
   @Override
-  public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-    View view = LayoutInflater.from(viewGroup.getContext())
-        .inflate(R.layout.item_movie, viewGroup, false);
-    return new MovieViewHolder(view);
+  public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int type) {
+    final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+    return new MovieViewHolder(inflater.inflate(R.layout.item_movie, parent, false));
   }
   
   @Override
-  public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
+  public void onBindViewHolder(@NonNull MovieViewHolder holder, int i) {
     Movie movie = mListMovie.get(i);
-    if (movie != null) movieViewHolder.setMovie(movie);
+    holder.setMovie(movie);
   }
   
   @Override

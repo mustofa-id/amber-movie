@@ -54,7 +54,6 @@ public class NotificationAction {
       calendar.set(Calendar.HOUR_OF_DAY, RELEASE_TODAY_TIME[0]);
       calendar.set(Calendar.MINUTE, RELEASE_TODAY_TIME[1]);
       calendar.set(Calendar.SECOND, 0);
-//      calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND) + 10); // TODO: REMOVE THIS
       setAlarm(calendar, RELEASE_TODAY_REQ_CODE, TYPE_RELEASE_TODAY);
     } else {
       cancelAlarm(RELEASE_TODAY_REQ_CODE);
@@ -63,6 +62,11 @@ public class NotificationAction {
   }
   
   private void setAlarm(Calendar calendar, int reqCode, String type) {
+    if (mAlarm == null) {
+      Log.d(TAG, "Failed to set alarm! AlarmManager not available");
+      return;
+    }
+    
     // Cancel existing alarm
     cancelAlarm(reqCode);
     if (calendar.before(Calendar.getInstance())) {
@@ -74,6 +78,11 @@ public class NotificationAction {
   }
   
   private void cancelAlarm(int reqCode) {
+    if (mAlarm == null) {
+      Log.d(TAG, "Failed to canceling alarm! AlarmManager not available");
+      return;
+    }
+    
     PendingIntent intent = getPendingIntent(PackageManager.COMPONENT_ENABLED_STATE_DISABLED, reqCode, null);
     mAlarm.cancel(intent);
     intent.cancel();

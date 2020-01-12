@@ -6,14 +6,14 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
 import id.mustofa.app.amber.util.DataConverter;
 
 /**
  * @author Habib Mustofa
  * Indonesia on 11/07/19.
  */
-@Database(entities = {MovieFavorite.class}, version = 1, exportSchema = false)
+@Database(entities = {Movie.class}, version = 1, exportSchema = false)
 @TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
   

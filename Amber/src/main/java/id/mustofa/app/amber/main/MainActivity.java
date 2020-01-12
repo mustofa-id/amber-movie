@@ -1,5 +1,6 @@
 package id.mustofa.app.amber.main;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import id.mustofa.app.amber.data.model.MediaType;
 import id.mustofa.app.amber.movie.MovieFragment;
 import id.mustofa.app.amber.movie.all.MovieAllFragment;
 import id.mustofa.app.amber.movie.favorite.MovieFavoriteFragment;
+import id.mustofa.app.amber.movie.search.MovieSearchActivity;
 import id.mustofa.app.amber.setting.SettingActivity;
 
 /**
@@ -131,12 +134,26 @@ public class MainActivity extends BaseAppCompatActivity
   }
   
   @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+    return super.onCreateOptionsMenu(menu);
+  }
+  
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.act_main_search) openSearch();
+    return super.onOptionsItemSelected(item);
+  }
+  
+  @Override
   public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
     int id = menuItem.getItemId();
     if (id == R.id.nav_main_discover) {
       setCurrentMovieMode(0);
     } else if (id == R.id.nav_main_favorite) {
       setCurrentMovieMode(1);
+    } else if (id == R.id.nav_main_search) {
+      openSearch();
     } else if (id == R.id.nav_main_setting) {
       Intent settingIntent = new Intent(this, SettingActivity.class);
       // Get result from SettingActivity.
@@ -154,6 +171,11 @@ public class MainActivity extends BaseAppCompatActivity
       recreate();
     }
     super.onActivityResult(requestCode, resultCode, data);
+  }
+  
+  private void openSearch() {
+    Intent intent = new Intent(this, MovieSearchActivity.class);
+    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
   }
   
   @Override

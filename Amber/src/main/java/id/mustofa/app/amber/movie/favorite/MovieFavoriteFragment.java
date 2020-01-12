@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import id.mustofa.app.amber.R;
 import id.mustofa.app.amber.data.model.MediaType;
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
 import id.mustofa.app.amber.movie.detail.MovieDetailActivity;
 import id.mustofa.app.amber.util.ViewModelFactory;
 
@@ -116,7 +116,7 @@ public class MovieFavoriteFragment extends Fragment implements MovieFavoriteItem
   }
   
   @Override
-  public void openMovieFavoriteDetail(MovieFavorite movieFavorite) {
+  public void openMovieFavoriteDetail(Movie movieFavorite) {
     Intent movieDetailIntent = new Intent(getActivity(), MovieDetailActivity.class);
     movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ITEM, movieFavorite);
     movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_TYPE, getMediaType());

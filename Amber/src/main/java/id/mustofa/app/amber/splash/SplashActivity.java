@@ -17,8 +17,9 @@ import id.mustofa.app.amber.notification.NotificationAction;
 public class SplashActivity extends AppCompatActivity {
   
   private static final String PREFS_INITIAL_KEY = "initialized";
-  private static final boolean PREFS_DEFAULT_DAILY_REMINDER = false;
-  private static final boolean PREFS_DEFAULT_RELEASE_TODAY = false;
+  private static final boolean PREFS_DEFAULT_DAILY_REMINDER = true;
+  private static final boolean PREFS_DEFAULT_RELEASE_TODAY = true;
+  private static final boolean PREFS_DEFAULT_RESTRICTED_MODE = true;
   
   private boolean mIsFirstSetup = false;
   
@@ -39,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
           getResources().getStringArray(R.array.prefs_entryValues_lang)[0]);
       editor.putBoolean(getString(R.string.key_prefs_daily_reminder), PREFS_DEFAULT_DAILY_REMINDER);
       editor.putBoolean(getString(R.string.key_prefs_release_today), PREFS_DEFAULT_RELEASE_TODAY);
-      editor.putBoolean(getString(R.string.key_prefs_restricted_mode), true);
+      editor.putBoolean(getString(R.string.key_prefs_restricted_mode), PREFS_DEFAULT_RESTRICTED_MODE);
       editor.apply();
       mIsFirstSetup = true;
     }

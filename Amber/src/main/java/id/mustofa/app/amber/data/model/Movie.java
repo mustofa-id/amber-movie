@@ -1,5 +1,6 @@
 package id.mustofa.app.amber.data.model;
 
+import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
@@ -14,11 +15,8 @@ import java.util.List;
 /**
  * @author Habib Mustofa
  * Indonesia on 05/07/19.
- * <p>
- * SerializedName prioritize to the movie. That mean value is assign
- * for movie field and alternate is tv show field from JSON schema.
  */
-@SuppressWarnings("unused")
+@Entity(tableName = "favorite_movie")
 public class Movie implements Parcelable {
   
   @PrimaryKey
@@ -77,6 +75,8 @@ public class Movie implements Parcelable {
   @Expose
   private boolean adult;
   
+  private String type;
+  
   // Room required no-args constructor
   public Movie() {}
   
@@ -96,6 +96,7 @@ public class Movie implements Parcelable {
     originCountry = in.createStringArrayList();
     in.readList(genreIds, Long.class.getClassLoader());
     adult = in.readByte() != 0;
+    type = in.readString();
   }
   
   @Ignore
@@ -115,6 +116,7 @@ public class Movie implements Parcelable {
     dest.writeStringList(originCountry);
     dest.writeList(genreIds);
     dest.writeByte((byte) (adult ? 1 : 0));
+    dest.writeString(type);
   }
   
   @Ignore
@@ -246,5 +248,13 @@ public class Movie implements Parcelable {
   
   public void setAdult(boolean adult) {
     this.adult = adult;
+  }
+  
+  public String getType() {
+    return type;
+  }
+  
+  public void setType(String type) {
+    this.type = type;
   }
 }

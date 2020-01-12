@@ -8,7 +8,7 @@ import android.database.Cursor;
 
 import java.util.List;
 
-import id.mustofa.app.amber.data.model.MovieFavorite;
+import id.mustofa.app.amber.data.model.Movie;
 
 /**
  * @author Habib Mustofa
@@ -18,16 +18,19 @@ import id.mustofa.app.amber.data.model.MovieFavorite;
 public interface MovieLocalDao {
   
   @Query("SELECT * FROM favorite_movie WHERE type=:type")
-  List<MovieFavorite> findFavoriteByType(String type);
+  List<Movie> findFavoriteByType(String type);
+  
+  @Query("SELECT * FROM favorite_movie WHERE title LIKE :query")
+  List<Movie> searchFavorite(String query);
   
   @Query("SELECT COUNT(*) FROM favorite_movie WHERE id=:id")
   int countFavoriteById(long id);
   
   @Insert
-  long insertFavorite(MovieFavorite movie);
+  long insertFavorite(Movie movie);
   
   @Delete
-  int deleteFavorite(MovieFavorite movie);
+  int deleteFavorite(Movie movie);
   
   // ContentProvider support
   @Query("SELECT * FROM favorite_movie")
