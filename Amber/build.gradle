@@ -1,9 +1,13 @@
 apply plugin: 'com.android.application'
 
-// Define Properties object
 def appProps = new Properties()
-// Load and read local.properties file
-appProps.load(project.rootProject.file("app.properties").newDataInputStream())
+def propsFile = project.rootProject.file("app.properties")
+if (propsFile.exists()) {
+    appProps.load(propsFile.newDataInputStream())
+}
+
+def localApiKey = appProps.getProperty('moviedb.apikey')
+def apiKey = localApiKey != null ? localApiKey : System.env.moviedb_apikey
 
 android {
     compileSdkVersion 28
@@ -17,7 +21,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // Create field called MovieDbApiKey and store api key from appProps with moviedb.appid key
-        buildConfigField 'String', 'MOVIEDB_API_KEY', "\"${appProps.getProperty('moviedb.apikey', '')}\""
+        buildConfigField 'String', 'MOVIEDB_API_KEY', "\"$apiKey\""
     }
     buildTypes {
         debug {}
